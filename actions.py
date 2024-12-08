@@ -137,3 +137,23 @@ class Actions:
             print("\t- " + str(command))
         print()
         return True
+    
+    #🌸
+    def back(game, list_of_words, number_of_parameters):
+        """
+        Permet au joueur de revenir à la dernière pièce visitée.
+        """
+        player = game.player
+        # Vérifiez si l'historique n'est pas vide
+        if len(player.history) > 0:
+            # Retirer la dernière pièce de l'historique et définir cette pièce comme la pièce actuelle
+            last_room = player.history.pop()
+            player.current_room = last_room
+            print(f"\nVous revenez dans la pièce précédente : {last_room.name}")
+            print(last_room.get_long_description())
+            print(player.get_history())  # Affiche l'historique des pièces visitées
+            return True
+        else:
+            # Si l'historique est vide, le joueur ne peut pas revenir en arrière
+            print("\nIl n'y a aucune pièce précédente dans l'historique.")
+            return False
