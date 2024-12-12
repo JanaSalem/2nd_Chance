@@ -4,9 +4,11 @@ class Player():
     # Define the constructor.
     def __init__(self, name):
         
+
         self.name = name
         self.current_room = None
         self.history = []  # Historique des pièces visitées 🌸
+        self.inventory = {}
     
     # Define the move method.
     def move(self, direction):
@@ -51,6 +53,41 @@ class Player():
             history_str += f"\t- {room.description}\n"
         
         return history_str
+    
+
+
+    #🌸
+    def add_item(self, item):
+        """
+        Ajoute un item à l'inventaire du joueur.
+        
+        Paramètres:
+        item : Item
+            L'objet à ajouter dans l'inventaire.
+        """
+        self.inventory[item.name] = item
+
+    def remove_item(self, item_name):
+        """
+        Retire un item de l'inventaire du joueur.
+        
+        Paramètres:
+        item_name : str
+            Le nom de l'objet à retirer.
+        """
+        if item_name in self.inventory:
+            del self.inventory[item_name]
+
+    def get_inventory(self):
+        """
+        Affiche tous les objets dans l'inventaire du joueur.
+        """
+        if not self.inventory:
+            print("Votre inventaire est vide.")
+        else:
+            for item in self.inventory.values():
+                print(item)
+
     
 
     

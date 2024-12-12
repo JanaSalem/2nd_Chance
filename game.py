@@ -1,13 +1,14 @@
 # Description: Game class
-
-
 # Import modules
+
+
 
 
 from room import Room
 from player import Player
 from command import Command
 from actions import Actions
+from item import Item
 
 
 class Game:
@@ -110,21 +111,27 @@ class Game:
         self.commands["back"] = back 
          # Initialisez l'historique du joueur
         self.history = []
+        look = Command("look","Permet de voir les objets de la pièce.", Actions.look, 0)#🌸 
+        self.commands["look"] = look
+        drop = Command("drop","Permet de déposer un objet dans l'inventaire,Action.drop",Actions.drop,0)
+        self.commands["drop"] = drop
+        take = Command("take","Permet de prendre un objet",Actions.take,0)
+        self.commands["take"]= take
 
 
 
         # Configuration des pièces
-        salon = Room("Salon", "au salon,un espace chaleureux et lumineux au cœur de la maison, entouré de baies vitrées donnant sur la nature luxuriante .")
-        cave = Room("Cave", "dans la cave, un endroit sombre et frais où se trouvent des objets anciens et des armes de toutes sortes.")
-        bureau = Room("Bureau", "au bureau, un lieu tranquille, entouré de Led de toutes les couleurs eclairant seules la pieces au centre plusieurs pc gamers pour un setup des plus immersifs.")
-        salle_musique = Room("Salle de Musique", "dans une salle remplie d'instruments ,d'un piano qui résonne harmonieusement et d'un micro demandant d'acceuillir les plus belles voix.")
-        jardin = Room("Jardin", "au jardin, un espace verdoyant où les plantes tropicales prospèrent.")
-        veranda = Room("Véranda", "dans un endroit ouvert sur l'île, offrant une vue paisible sur la jungle et la plage qui est rempli d'intruments scientifiques des plus étranges.")
-        chambre = Room("Chambre", "dans un refuge confortable avec un lit balladaquin ayant une vue maginifique sur le jardin.")
-        dressing = Room("Dressing", "dans un endroit rempli de vêtements et d'accessoires de luxe, soigneusement organisés.")
-        jungle = Room("Jungle", "dans un lieu dense et mystérieux rempli de faune exotique et mystique.")
-        plage = Room("Plage", "dans un endroit idyllique, où le sable chaud rencontre la mer turquoise.")
-        villa = Room("Villa", "dans la Villa, le point central de vie sur l'île, accueillant et protégé.")
+        salon = Room("Salon", "le salon,un espace chaleureux et lumineux au cœur de la maison, entouré de baies vitrées donnant sur la nature luxuriante .")
+        cave = Room("Cave", " la cave, un endroit sombre et frais où se trouvent des objets anciens et des armes de toutes sortes.")
+        bureau = Room("Bureau", "le bureau, un lieu tranquille, entouré de Led de toutes les couleurs eclairant seules la pieces au centre plusieurs pc gamers pour un setup des plus immersifs.")
+        salle_musique = Room("Salle de Musique", "une salle remplie d'instruments ,d'un piano qui résonne harmonieusement et d'un micro demandant d'acceuillir les plus belles voix.")
+        jardin = Room("Jardin", "un jardin, un espace verdoyant où les plantes tropicales prospèrent.")
+        veranda = Room("Véranda", "un endroit ouvert sur l'île, offrant une vue paisible sur la jungle et la plage qui est rempli d'intruments scientifiques des plus étranges.")
+        chambre = Room("Chambre", "un refuge confortable avec un lit balladaquin ayant une vue maginifique sur le jardin.")
+        dressing = Room("Dressing", "un endroit rempli de vêtements et d'accessoires de luxe, soigneusement organisés.")
+        jungle = Room("Jungle", "un lieu dense et mystérieux rempli de faune exotique et mystique.")
+        plage = Room("Plage", "un endroit idyllique, où le sable chaud rencontre la mer turquoise.")
+        villa = Room("Villa", "la Villa, le point central de vie sur l'île, accueillant et protégé.")
 
 
         # Ajouter les pièces à la liste des pièces
@@ -142,7 +149,49 @@ class Game:
         dressing.exits = {"O": chambre, "S": jardin, "D": jardin}
         jungle.exits = {"S": jardin, "N": veranda, "E": plage,"O":villa}
         plage.exits = {"O": jungle, "N": villa}
-        villa.exits = {"S": plage,"O":jungle}
+        villa.exits = {"S": plage,"O":jungle,"N": salon}
+
+
+
+    
+
+        #Ajout des objets
+        bougie = Item("bougie", "une bougie parfumée", 0.2)
+        lettre = Item("lettre", "une lettre d'amour qui semble inachevé", 0.1)
+        receuil_de_poeme = Item("receuil de poèmes", "un livre ouvert et marqué par le temps qui semble avoir beaucoup servit est sur la table de chevet",0.5)
+        robe_paillette = Item("robe pailletté", "une robe pailleté rose bonbon est préparé sur un mannequin", 0.7)
+        maquillage = Item("maquillage", "plusieurs trousses remplis de maquillage sont mis a disposition sur l'ilot se situant au mileu du dressing", 0.5)
+        fruits_enchantes= Item("fruits enchantés", "sur plusieurs arbres de la forêt tu peux apercevoir des fruits mystérieux qui semblent appétissant ils sont entouré de lumière, ils t'appellent", 4)
+        partition = Item("partition", "tu trouves sur le piano une partition d'une mélodie qui te semblent mélodieuse", 1)
+        micro = Item("micro", "un micro traine dans la pièce il semble attendre quelqu'un de particulier", 1)
+        armes = Item("armes", "dans le fond de la pièce sur le mur tu vois une collection inéglable d'armes de toutes sortes et de toutes les tailles", 1)
+        poignard = Item("poignard", "Prendras-tu cette arme pour t'accompagner lors de ton aventure ?", 1)
+        épée = Item("épée", "Prendras-tu cette arme pour t'accompagner lors de ton aventure ?", 1)
+        arc = Item("arc et fléches", "Prendras-tu cette arme pour t'accompagner lors de ton aventure ?", 1)
+        revolver = Item("revolver", "Prendras-tu cette arme pour t'accompagner lors de ton aventure ?", 1)
+        tablette = Item("tablette portable", "Dans cette sombre pièce tou vois branché à l'ordinateur une tablette mystérieuse", 1)
+       
+       
+        salon.inventory ={bougie:bougie}
+        cave.inventory ={armes:armes,épée:épée,poignard:poignard,revolver:revolver}
+        bureau.inventory ={tablette:tablette}
+        salle_musique.inventory ={partition:partition,micro:micro}
+        chambre.inventory ={lettre:lettre,receuil_de_poeme:receuil_de_poeme}
+        dressing.inventory ={robe_paillette:robe_paillette,maquillage:maquillage}
+        jungle.inventory ={fruits_enchantes:fruits_enchantes}
+        
+
+
+        #Inventaires par lieu :
+        salon.inventory_room ={bougie}
+        chambre.inventory_room ={lettre, receuil_de_poeme}
+        dressing.inventory_room = {robe_paillette,maquillage}
+        jungle.inventory_room ={fruits_enchantes}
+        salle_musique.inventory_room ={partition,micro}
+        cave.inventory_room = {armes,poignard,épée,arc,revolver}
+        bureau.inventory_room= {tablette}
+
+
 
 
         # Configuration du joueur , setup player and starting room
@@ -182,7 +231,7 @@ class Game:
         # Si la commande est vide, ne rien faire et retourner immédiatement
         if not command_string:
             return
-        # Sépare la chaîne de commande en une liste de mots (par exemple "go N" devient ["go", "N"])
+        # Sépare la chaîne de commande en une list* de mots (par exemple "go N" devient ["go", "N"])
         list_of_words = command_string.split(" ")
         # Récupère le premier mot, qui est le mot de commande (par exemple "go")
         command_word = list_of_words[0]
