@@ -76,6 +76,7 @@ class Game:
         self.rooms = []
         self.commands = {}
         self.player = None
+        #self.direction_ensemble = set()
         self.valid_direction = set() # Initialise valid_direction comme un ensemble vide
         #Ajout le dictionnaire des alias et des directions 
         self.direction_aliases = {
@@ -113,11 +114,22 @@ class Game:
         self.history = []
         look = Command("look","Permet de voir les objets de la pièce.", Actions.look, 0)#🌸 
         self.commands["look"] = look
-        drop = Command("drop","Permet de déposer un objet dans l'inventaire,Action.drop",Actions.drop,0)
-        self.commands["drop"] = drop
-        take = Command("take","Permet de prendre un objet",Actions.take,0)
+        #drop = Command("drop","Permet de déposer un objet dans l'inventaire,Action.drop",Actions.drop,0)
+        #self.commands["drop"] = drop
+        take = Command("take","Permet de prendre un objet",Actions.take,1)
         self.commands["take"]= take
+        drop = Command("drop","permet de reposer un objet",Actions.drop,1)
+        self.commands["drop"]= drop
+        check = Command("check","Permet de voir ce qui ce trouve dans son inventaire",Actions.check,0)
+        self.commands["check"]= check
 
+
+        """self.direction_ensemble.add("N")
+        self.direction_ensemble.add("S")
+        self.direction_ensemble.add("O")
+        self.direction_ensemble.add("E")
+        self.direction_ensemble.add("U")
+        self.direction_ensemble.add("D")"""
 
 
         # Configuration des pièces
@@ -172,13 +184,13 @@ class Game:
         tablette = Item("tablette portable", "Dans cette sombre pièce tou vois branché à l'ordinateur une tablette mystérieuse", 1)
        
        
-        salon.inventory ={bougie:bougie}
-        cave.inventory ={armes:armes,épée:épée,poignard:poignard,revolver:revolver}
-        bureau.inventory ={tablette:tablette}
-        salle_musique.inventory ={partition:partition,micro:micro}
-        chambre.inventory ={lettre:lettre,receuil_de_poeme:receuil_de_poeme}
-        dressing.inventory ={robe_paillette:robe_paillette,maquillage:maquillage}
-        jungle.inventory ={fruits_enchantes:fruits_enchantes}
+        salon.inventory_room ={bougie}
+        cave.inventory_room ={armes,épée,poignard,revolver}
+        bureau.inventory_room ={tablette}
+        salle_musique.inventory_room ={partition,micro}
+        chambre.inventory_room ={lettre,receuil_de_poeme}
+        dressing.inventory_room ={robe_paillette,maquillage}
+        jungle.inventory_room ={fruits_enchantes}
         
 
 
@@ -224,15 +236,15 @@ class Game:
         command_string : str
             La commande entrée par le joueur, sous forme de chaîne de caractères.
         """
-        # Supprime les espaces au début et à la fin de la chaîne de commande
+        """# Supprime les espaces au début et à la fin de la chaîne de commande
         command_string = command_string.strip().lower()
 
 
         # Si la commande est vide, ne rien faire et retourner immédiatement
         if not command_string:
-            return
+            return"""
         # Sépare la chaîne de commande en une list* de mots (par exemple "go N" devient ["go", "N"])
-        list_of_words = command_string.split(" ")
+        """ list_of_words = command_string.split(" ")
         # Récupère le premier mot, qui est le mot de commande (par exemple "go")
         command_word = list_of_words[0]
 
@@ -256,9 +268,20 @@ class Game:
             # Récupère l'objet Commande associé au mot de commande
             command = self.commands[command_word]
             # Appelle l'action associée à la commande, en passant le jeu, la liste des mots et le nombre de paramètres
+            command.action(self, list_of_words, command.number_of_parameters)"""
+
+        # Split the command string into a list of words
+        list_of_words = command_string.split(" ")
+
+        command_word = list_of_words[0]
+
+        # If the command is not recognized, print an error message
+        if command_word not in self.commands.keys():
+            print(f"\nCommande '{command_word}' non reconnue. Entrez 'help' pour voir la liste des commandes disponibles.\n")
+        # If the command is recognized, execute it
+        else:
+            command = self.commands[command_word]
             command.action(self, list_of_words, command.number_of_parameters)
-
-
 
 
     def print_welcome(self):
@@ -281,4 +304,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

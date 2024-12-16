@@ -158,6 +158,15 @@ class Actions:
             print("\nIl n'y a aucune pièce précédente dans l'historique.")
             return False
         
+    def check(game, list_of_words, number_of_parameters):
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+    
+        game.player.print_inventory()
+        return True
 
     def look(game, list_of_words, number_of_parameters):
         l = len(list_of_words)
@@ -166,7 +175,7 @@ class Actions:
             print(MSG0.format(command_word = command_word))
             return False
    
-        game.player.current_room.print_inventory()
+        game.player.current_room.print_inventory_room()
         return True
     
     def take(game, list_of_words, number_of_parameters):
@@ -176,16 +185,29 @@ class Actions:
             print(MSG1.format(command_word=command_word))
             return False
    
-        item_choisi = list_of_words[1]
+        item_choisi = list_of_words[1]  # 🌟 Récupère le nom de l'objet à prendre. j ai fait comme ju 
         for i in game.player.current_room.inventory_room:
-            if i.name == item_choisi :
+            if i.name == item_choisi : 
                 game.player.inventory[i]=i
                 game.player.current_room.inventory_room.remove(i)
                 print("\nCette item a été ajouté à votre inventaire !")
                 return True
 
-
         print("Cette item n'existe pas")
+
+        """# Vérifie si l'objet existe dans la pièce actuelle
+        item = self.current_room.inventory.get(item_name)
+    
+        if not item:
+            print(f"\nIl n'y a pas d'objet nommé '{item_name}' dans cette pièce.")
+            return
+    
+        # Ajoute l'objet à l'inventaire du joueur
+        self.player.add_item(item)
+        # Retire l'objet de la pièce (ou le met dans l'inventaire de la pièce)
+        del self.current_room.inventory[item_name]
+        print(f"\nVous avez pris l'objet '{item_name}'.")
+        
    
     def drop(game, list_of_words, number_of_parameters):
         l = len(list_of_words)
@@ -203,8 +225,21 @@ class Actions:
                 return True
 
 
-        print("Cette item n'existe pas")
+        print("Cette item n'existe pas")"""
 
-
+    def drop(game, list_of_words, number_of_parameters):
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG1.format(command_word=command_word))
+            return False
     
+        item_choisi = list_of_words[1]
+        for i in game.player.inventory:
+            if i.name == item_choisi : 
+                game.player.current_room.inventory_room.add(i)
+                del game.player.inventory[i]
+                print("\nCette item a été retiré à votre inventaire !")
+                return True
 
+        print("Cette item n'existe pas")

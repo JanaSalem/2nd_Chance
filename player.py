@@ -54,10 +54,12 @@ class Player():
         
         return history_str
     
-
+    def add_item(self, item):
+        """Ajoute un item à l'inventaire du joueur."""
+        self.inventory[item.name] = item
 
     #🌸
-    def add_item(self, item):
+   # def add_item(self, item):
         """
         Ajoute un item à l'inventaire du joueur.
         
@@ -65,9 +67,9 @@ class Player():
         item : Item
             L'objet à ajouter dans l'inventaire.
         """
-        self.inventory[item.name] = item
+        #self.inventory[item.name] = item
 
-    def remove_item(self, item_name):
+    #def remove_item(self, item_name):
         """
         Retire un item de l'inventaire du joueur.
         
@@ -75,22 +77,32 @@ class Player():
         item_name : str
             Le nom de l'objet à retirer.
         """
-        if item_name in self.inventory:
-            del self.inventory[item_name]
+        #if item_name in self.inventory:
+            #del self.inventory[item_name]
 
-    def get_inventory(self):
+    #def get_inventory(self):
         """
         Affiche tous les objets dans l'inventaire du joueur.
         """
-        if not self.inventory:
+        #if not self.inventory:
+           # print("Votre inventaire est vide.")
+        #else:
+            #for item in self.inventory.values():
+                #print(item)
+
+    
+
+    def print_inventory(self):
+       
+        if len(self.inventory) == 0:
             print("Votre inventaire est vide.")
-        else:
-            for item in self.inventory.values():
-                print(item)
-
-    
-
-    
+            return True
+        
+        print("\nVous disposez des items suivants :\n")
+        for key, value in self.inventory.items():
+            #print("-" + key + " : " + str(self.inventory[key]))
+            print(key.name, ":", key)
+        return True
 
 
     
