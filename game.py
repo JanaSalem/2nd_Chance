@@ -9,7 +9,7 @@ from player import Player
 from command import Command
 from actions import Actions
 from item import Item
-
+from character import Character 
 
 class Game:
     """
@@ -93,11 +93,6 @@ class Game:
         }
         
        
-
-
-       
-
-   
     def setup(self):
         """
         Configure les composants du jeu, y compris les pièces,
@@ -205,6 +200,13 @@ class Game:
         cave.inventory_room = {armes,poignard,épée,arc,revolver}
         bureau.inventory_room= {tablette}
 
+        # Setup Personnages
+        Beyonce = Character("Beyonce", "La star", salle_musique, ["don't talk to me"])
+        #Jack = Character("Jack Letombeur","Le seducteur endiablé",chambre,["Ravie d'avoir enfin la possibilité de te parler yeux dans les yeux"])
+
+        #Setup personnage par lieux
+
+        salle_musique.characters = {Beyonce}
 
 
 

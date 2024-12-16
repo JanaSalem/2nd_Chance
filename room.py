@@ -8,6 +8,8 @@ class Room:
         self.description = description
         self.exits = {}
         self.inventory_room = set() #room🌟
+        self.characters = {}
+
     # Define the get_exit method.
     def get_exit(self, direction):
 
@@ -104,7 +106,7 @@ class Room:
         for i in self.inventory_room:
             print("   ", i.name, ":", i.description)
 
-        #for i in self.characters:
-            #print("   ", i)
+        for i in self.characters:
+            print("   ", i)
 
         return True
