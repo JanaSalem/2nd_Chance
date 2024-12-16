@@ -195,7 +195,7 @@ class Actions:
 
         print("Cette item n'existe pas")
 
-        """# Vérifie si l'objet existe dans la pièce actuelle
+        # Vérifie si l'objet existe dans la pièce actuelle
         item = self.current_room.inventory.get(item_name)
     
         if not item:
@@ -225,21 +225,21 @@ class Actions:
                 return True
 
 
-        print("Cette item n'existe pas")"""
-
-    def drop(game, list_of_words, number_of_parameters):
-        l = len(list_of_words)
-        if l != number_of_parameters + 1:
-            command_word = list_of_words[0]
-            print(MSG1.format(command_word=command_word))
-            return False
-    
-        item_choisi = list_of_words[1]
-        for i in game.player.inventory:
-            if i.name == item_choisi : 
-                game.player.current_room.inventory_room.add(i)
-                del game.player.inventory[i]
-                print("\nCette item a été retiré à votre inventaire !")
-                return True
-
         print("Cette item n'existe pas")
+
+#    """ def drop(game, list_of_words, number_of_parameters):
+#         l = len(list_of_words)
+#         if l != number_of_parameters + 1:
+#             command_word = list_of_words[0]
+#             print(MSG1.format(command_word=command_word))
+#             return False
+    
+#         item_choisi = list_of_words[1]
+#         for i in game.player.inventory:
+#             if i.name == item_choisi : 
+#                 game.player.current_room.inventory_room.add(i)
+#                 del game.player.inventory[i]
+#                 print("\nCette item a été retiré à votre inventaire !")
+#                 return True
+
+#         print("Cette item n'existe pas")"""

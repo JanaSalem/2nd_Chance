@@ -114,8 +114,8 @@ class Game:
         self.history = []
         look = Command("look","Permet de voir les objets de la pièce.", Actions.look, 0)#🌸 
         self.commands["look"] = look
-        #drop = Command("drop","Permet de déposer un objet dans l'inventaire,Action.drop",Actions.drop,0)
-        #self.commands["drop"] = drop
+        drop = Command("drop","Permet de déposer un objet dans l'inventaire,Action.drop",Actions.drop,0)
+        self.commands["drop"] = drop
         take = Command("take","Permet de prendre un objet",Actions.take,1)
         self.commands["take"]= take
         drop = Command("drop","permet de reposer un objet",Actions.drop,1)
@@ -236,27 +236,28 @@ class Game:
         command_string : str
             La commande entrée par le joueur, sous forme de chaîne de caractères.
         """
-        """# Supprime les espaces au début et à la fin de la chaîne de commande
+        # Supprime les espaces au début et à la fin de la chaîne de commande
         command_string = command_string.strip().lower()
 
 
         # Si la commande est vide, ne rien faire et retourner immédiatement
         if not command_string:
-            return"""
+            return
         # Sépare la chaîne de commande en une list* de mots (par exemple "go N" devient ["go", "N"])
-        """ list_of_words = command_string.split(" ")
+        list_of_words = command_string.split(" ")
         # Récupère le premier mot, qui est le mot de commande (par exemple "go")
         command_word = list_of_words[0]
 
+        if command_word == 'go':
         #Met la direction sous le bon format si besoin
-        if len(list_of_words) > 1: #Condition permets de vérifier si le joueur a bien entré un deuxième mot après la commande(premier mot go et le deuxième N,..)
+            if len(list_of_words) > 1: #Condition permets de vérifier si le joueur a bien entré un deuxième mot après la commande(premier mot go et le deuxième N,..)
             
-            raw_direction = list_of_words[1].upper()  # Convertir en majuscules, et les stockes
-            if raw_direction in self.direction_aliases: # un dictionnaire où les clés sont les alias des directions
-                list_of_words[1] = self.direction_aliases[raw_direction]  # Mapper vers la direction standard
-            else:
-                print(f"\n'{list_of_words[1]}' n'est pas une direction valide.")
-                return
+                raw_direction = list_of_words[1].upper()  # Convertir en majuscules, et les stockes
+                if raw_direction in self.direction_aliases: # un dictionnaire où les clés sont les alias des directions
+                    list_of_words[1] = self.direction_aliases[raw_direction]  # Mapper vers la direction standard
+                else:
+                    print(f"\n'{list_of_words[1]}' n'est pas une direction valide.")
+                    return
 
 
 
@@ -268,9 +269,9 @@ class Game:
             # Récupère l'objet Commande associé au mot de commande
             command = self.commands[command_word]
             # Appelle l'action associée à la commande, en passant le jeu, la liste des mots et le nombre de paramètres
-            command.action(self, list_of_words, command.number_of_parameters)"""
+            command.action(self, list_of_words, command.number_of_parameters)
 
-        # Split the command string into a list of words
+        """# Split the command string into a list of words
         list_of_words = command_string.split(" ")
 
         command_word = list_of_words[0]
@@ -281,7 +282,7 @@ class Game:
         # If the command is recognized, execute it
         else:
             command = self.commands[command_word]
-            command.action(self, list_of_words, command.number_of_parameters)
+            command.action(self, list_of_words, command.number_of_parameters)"""
 
 
     def print_welcome(self):
