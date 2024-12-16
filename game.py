@@ -87,7 +87,9 @@ class Game:
             "NE": "NE", "NORD-EST": "NE",
             "NO": "NO", "NORD-OUEST": "NO",
             "SE": "SE", "SUD-EST": "SE",
-            "SO": "SO", "SUD-OUEST": "SO"
+            "SO": "SO", "SUD-OUEST": "SO",
+            "U":"U","UP":"U","D":"D","DOWN":"D"
+
         }
         
        
