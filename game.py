@@ -9,8 +9,8 @@ from player import Player
 from command import Command
 from actions import Actions
 from item import Item
-from character import Character 
-
+from character import Character
+#from config import DEBUG
 class Game:
     """
     Classe représentant le jeu d'aventure.
@@ -76,6 +76,7 @@ class Game:
         self.rooms = []
         self.commands = {}
         self.player = None
+        self.characters = {} #🌟
         #self.direction_ensemble = set()
         self.valid_direction = set() # Initialise valid_direction comme un ensemble vide
         #Ajout le dictionnaire des alias et des directions 
@@ -109,16 +110,18 @@ class Game:
         self.commands["back"] = back 
          # Initialisez l'historique du joueur
         self.history = []
-        look = Command("look","Permet de voir les objets de la pièce.", Actions.look, 0)#🌸 
+        look = Command("look"," Permet de voir les objets de la pièce.", Actions.look, 0)#🌸 
         self.commands["look"] = look
-        drop = Command("drop","Permet de déposer un objet dans l'inventaire,Action.drop",Actions.drop,0)
+        drop = Command("drop"," Permet de déposer un objet dans l'inventaire,Action.drop",Actions.drop,0)
         self.commands["drop"] = drop
-        take = Command("take","Permet de prendre un objet",Actions.take,1)
+        take = Command("take"," Permet de prendre un objet",Actions.take,1)
         self.commands["take"]= take
-        drop = Command("drop","permet de reposer un objet",Actions.drop,1)
+        drop = Command("drop"," permet de reposer un objet",Actions.drop,1)
         self.commands["drop"]= drop
-        check = Command("check","Permet de voir ce qui ce trouve dans son inventaire",Actions.check,0)
+        check = Command("check"," Permet de voir ce qui ce trouve dans son inventaire",Actions.check,0)
         self.commands["check"]= check
+        talk = Command("talk"," Permet de parler au personnage sur l'île",Actions.talk,1)
+        self.commands["talk"]= talk
 
 
         """self.direction_ensemble.add("N")
@@ -201,15 +204,23 @@ class Game:
         bureau.inventory_room= {tablette}
 
         # Setup Personnages
-        Beyonce = Character("Beyonce", "La star", salle_musique, ["don't talk to me"])
-        #Jack = Character("Jack Letombeur","Le seducteur endiablé",chambre,["Ravie d'avoir enfin la possibilité de te parler yeux dans les yeux"])
-
+        Beyonce = Character("Beyonce", "La star", salle_musique, ["don't forget to tell me"])
+        Jack = Character("Jack Letombeur","Le seducteur endiablé",chambre,["Ravie d'avoir enfin la possibilité de te parler yeux dans les yeux"])
+        Lloyde = Character("Lloyde","Le gameur déchu",bureau,["Jsuis occupé ferme les rideaux stp"])
+        Orion = Character("Orion","Le scientifique fou",veranda,["Passe moi le bécher","Je suis un génie des sciences AHAHAHA"])
+       
         #Setup personnage par lieux
+        salle_musique.characters[Beyonce.name.lower()] = Beyonce
+        chambre.characters[Jack.name.lower()] = Jack
+        bureau.characters[Lloyde.name.lower()] = Lloyde
+        veranda.characters[Orion.name.lower()] = Orion
 
-        salle_musique.characters = {Beyonce}
+        """character_name = "beyonce"  # Nom du personnage à rechercher
+        character = salle_musique.characters.get(character_name.lower()) 
+        character_name = "jack"  # Nom du personnage à rechercher
+        character = chambre.characters.get(character_name.lower()) """
 
-
-
+        
         # Configuration du joueur , setup player and starting room
         self.player = Player(input("\nEntrez votre nom: "))
         self.player.current_room = plage  # La plage est la pièce de départ
@@ -221,13 +232,84 @@ class Game:
 
        
     def play(self):
+        """"
         """
-        Démarre le jeu, affiche le message de bienvenue et lance la boucle principale.
-        """
+        #Démarre le jeu, affiche le message de bienvenue et lance la boucle principale.
+        
         self.setup()
         self.print_welcome()
         while not self.finished:
+        #Gérer les déplacements des PNJ
+            for character in self.current_room.characters.values():
+                if isinstance(character, Character):  # Vérifie que c'est un PNJ
+                    moved = character.move()  # Appelle leur méthode move()
+                    if moved:
+                        print(f"{character.name} s'est déplacé dans une autre pièce.")  # Message optionnel
+            
             self.process_command(input("> "))
+        
+        """while True:
+            # Afficher la description de la pièce et les objets présents
+            self.player.current_room.print_inventory_room()
+
+            # Vérifier si un personnage est dans la même pièce
+            for character in self.player.current_room.characters:
+                # Si DEBUG est False, cette ligne sera ignorée.
+                if DEBUG:
+                    print(f"DEBUG: {character.name} est dans la pièce.")
+                    character.get_msg()  # Afficher les messages associés au PNJ
+
+            # Obtenir la commande de l'utilisateur
+            command_input = input("\n> ")
+            list_of_words = command_input.lower().split()
+
+            # Processer la commande
+            self.process_command(list_of_words)
+
+            # Déplacer les personnages non joueurs à chaque tour
+            for character in self.player.current_room.characters:
+                if character.move():
+                    # Si DEBUG est False, cette ligne sera ignorée.
+                    if DEBUG:
+                        print(f"DEBUG: {character.name} s'est déplacé vers une nouvelle pièce.")
+                else:
+                    # Si DEBUG est False, cette ligne sera ignorée.
+                    if DEBUG:
+                        print(f"DEBUG: {character.name} reste dans la même pièce.")
+
+            # Afficher les actions restantes du tour de jeu si nécessaire
+            if DEBUG:
+                print("DEBUG: Fin du tour.")"""
+        """self.setup()
+        if self.player is None:
+            print("Erreur : le joueur n'est pas correctement initialisé.")
+            return
+    
+        if self.player.current_room is None:
+            print("Erreur : la pièce de départ du joueur n'est pas définie.")
+            return
+        
+        self.print_welcome()  # Affiche un message de bienvenue
+
+        while not self.finished:
+            # Processus de jeu, demande à l'utilisateur de saisir une commande
+            command_input = input("> ")
+            self.process_command(command_input)  # Traite la commande entrée par le joueur
+
+            # Affiche les objets et les personnages de la pièce actuelle
+            self.player.current_room.print_inventory_room()
+
+            # Déplacer les personnages non joueurs à chaque tour
+            for character in self.player.current_room.characters:
+                if character.move():
+                    if DEBUG:
+                        print(f"DEBUG: {character.name} s'est déplacé vers une nouvelle pièce.")
+                else:
+                    if DEBUG:
+                        print(f"DEBUG: {character.name} reste dans la même pièce.")
+
+            if DEBUG:
+                print("DEBUG: Fin du tour.")"""
 
 
     def process_command(self, command_string: str) -> None:

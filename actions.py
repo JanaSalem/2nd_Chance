@@ -1,3 +1,4 @@
+#from config import DEBUG
 # Description: The actions module.
 
 # The actions module contains the functions that are called when a command is executed.
@@ -15,6 +16,7 @@
 MSG0 = "\nLa commande '{command_word}' ne prend pas de paramètre.\n"
 # The MSG1 variable is used when the command takes 1 parameter.
 MSG1 = "\nLa commande '{command_word}' prend 1 seul paramètre.\n"
+
 
 class Actions:
 
@@ -55,9 +57,29 @@ class Actions:
 
         # Get the direction from the list of words.
         direction = list_of_words[1]
+        if direction not in player.current_room.exits:
+            print(f"\nIl n'y a pas de sortie dans la direction {direction}.")
+        return False
         # Move the player in the direction specified by the parameter.
         player.move(direction)
+        for character in player.current_room.characters.values():  # Corrected line
+            if character.current_room == player.current_room:
+                print(f"Vous voyez {character.name} ici : {character.description}")
+        
         return True
+
+        """if DEBUG:
+            print(f"DEBUG: Le joueur {player.name} s'est déplacé vers {direction}.")
+
+        # Afficher les personnages dans la pièce du joueur si DEBUG est activé
+        if DEBUG:
+            print("DEBUG: Vérification des personnages dans la nouvelle pièce...")
+    
+        for character in player.current_room.characters.values():  # Itérer sur les valeurs du dictionnaire
+            if character.current_room == player.current_room:
+                print(f"DEBUG: Vous voyez {character.name} ici : {character.description}")
+    
+        return True"""
 
     def quit(game, list_of_words, number_of_parameters):
         """
@@ -243,3 +265,34 @@ class Actions:
 #                 return True
 
 #         print("Cette item n'existe pas")"""
+
+    def talk(game, list_of_words, number_of_parameters):
+        """
+        Permet au joueur de parler à un personnage non joueur (PNJ) dans la pièce actuelle.
+
+        Paramètres:
+        -----------
+        game : Game
+            L'instance du jeu.
+        arguments : list
+            Les arguments passés avec la commande (par ex. ["talk", "gandalf"]).
+        number_of_parameters : int
+            Le nombre de paramètres requis par la commande.
+        """
+        if len(list_of_words) - 1 < number_of_parameters:
+            print("Cette commande nécessite un paramètre supplémentaire (le nom du personnage).")
+            return
+
+        # Récupérer le nom du personnage (2ème mot de la commande)
+        character_name = list_of_words[1].lower()
+
+        # Vérifier si le personnage existe dans la pièce actuelle
+        current_room = game.player.current_room
+        if character_name in current_room.characters:
+            character = current_room.characters[character_name]
+            character.get_msg()  # Appeler la méthode get_msg du PNJ
+            
+        
+        else : 
+            # Si aucun personnage n'a été trouvé
+            print(f"\nIl n'y a aucun personnage nommé '{character_name}' ici.\n")
