@@ -57,16 +57,38 @@ class Actions:
 
         # Get the direction from the list of words.
         direction = list_of_words[1]
+        
+
         if direction not in player.current_room.exits:
             print(f"\nIl n'y a pas de sortie dans la direction {direction}.")
-        return False
+            return False
+    
         # Move the player in the direction specified by the parameter.
-        player.move(direction)
-        for character in player.current_room.characters.values():  # Corrected line
-            if character.current_room == player.current_room:
-                print(f"Vous voyez {character.name} ici : {character.description}")
+        sucess = player.move(direction)
+        if not sucess:
+            return False
         
+         # Afficher la description de la pièce actuelle
+        print(player.current_room.description)
+        print(f"\nSorties: {', '.join(player.current_room.exits.keys())}\n")
+
+        # Affichage des personnages dans la pièce
+        if player.current_room.characters:
+            for character in player.current_room.characters.values():
+                print(f"Vous voyez {character.name} ici : {character.description}")
+
         return True
+
+
+
+        """for character in player.current_room.characters.values():  # Corrected line
+            #if character.current_room == player.current_room:
+            print(f"Vous voyez {character.name} ici : {character.description}")
+            return True 
+
+        # Afficher les sorties disponibles
+        print(f"\nSorties: {', '.join(player.current_room.exits.keys())}\n")
+        return True"""
 
         """if DEBUG:
             print(f"DEBUG: Le joueur {player.name} s'est déplacé vers {direction}.")

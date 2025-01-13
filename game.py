@@ -224,7 +224,7 @@ class Game:
         # Configuration du joueur , setup player and starting room
         self.player = Player(input("\nEntrez votre nom: "))
         self.player.current_room = plage  # La plage est la pièce de départ
-
+        self.characters = {"Beyonce":Beyonce,"Jack":Jack,"Orion":Orion,"Lloyde":Lloyde}
 
     def update_valid_direction(self):
         #met à jour les directions valides selon la pièce où est le joueur
@@ -240,7 +240,8 @@ class Game:
         self.print_welcome()
         while not self.finished:
         #Gérer les déplacements des PNJ
-            for character in self.current_room.characters.values():
+            for character in self.characters.values(): #
+                print(character)
                 if isinstance(character, Character):  # Vérifie que c'est un PNJ
                     moved = character.move()  # Appelle leur méthode move()
                     if moved:

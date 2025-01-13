@@ -84,29 +84,45 @@ class Character():
             return False  # Le personnage ne s'est pas déplacé"""
 
         # Vérifie s'il y a des sorties dans la pièce actuelle
-        if not self.current_room.exits:
+        if not self.current_room or not self.current_room.exits:
             print(f"{self.name} ne peut pas se déplacer, aucune sortie disponible.")
             return False
         
         # Une chance sur deux de se déplacer (50% de chance)
         if random.choice([True, False]):
             # Choisir une direction au hasard parmi les sorties disponibles
-            direction = random.choice(list(self.current_room.exits.keys()))
+            next_room = random.choice(list(self.current_room.exits.values()))
+            print(f"{self.name} se déplace vers {next_room.name}.")
             
             # Trouver la pièce adjacente à cette direction
-            next_room = self.current_room.exits[direction]
+            #next_room = self.current_room.exits[direction]
             
             # Déplacer le personnage dans la nouvelle pièce
-            self.current_room.characters.remove(self)  # Retirer le personnage de la pièce actuelle
-            next_room.characters.add(self)  # Ajouter le personnage dans la nouvelle pièce
-            self.current_room = next_room  # Mettre à jour la pièce actuelle du personnage
+            #del self.current_room.character(self.name)
+            #self.current_room.characters.remove(self.name)  # Retire le personnage de la pièce actuelle
+            #next_room.characters.add(self)  # Ajoute le personnage dans la nouvelle pièce
             
-            print(f"{self.name} se déplace vers {next_room.name}.")
+
+            #self.current_room = next_room  # Met à jour la pièce actuelle du personnage
+            
+            #print(f"{self.name} se déplace vers {next_room.name}.")
+            #return True
+            # Retirer de la pièce actuelle (utilise le nom comme clé)
+            self.current_room.characters.pop(self.name, None)
+            
+            # Mettre à jour la pièce actuelle
+            self.current_room = next_room
+            
+            # Ajouter le personnage à la nouvelle pièce
+            next_room.characters[self.name] = self
+            
             return True
-        else:
+        
+        return False
+        """else:
             # Le personnage reste dans la pièce actuelle
             print(f"{self.name} reste dans la pièce {self.current_room.name}.")
-            return False
+            return False"""
 
 
 

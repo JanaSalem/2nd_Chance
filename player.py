@@ -12,7 +12,7 @@ class Player():
     
     # Define the move method.
     def move(self, direction):
-        # Get the next room from the exits dictionary of the current room.
+        """# Get the next room from the exits dictionary of the current room.
         next_room = self.current_room.exits[direction]
 
         # If the next room is None, print an error message and return False.
@@ -26,12 +26,27 @@ class Player():
         
         # Set the current room to the next room.
         self.current_room = next_room
+       
         print(self.current_room.get_long_description())
-
-        # Ajoute la pièce actuelle dans l'historique 🌸
+         # Ajoute la pièce actuelle dans l'historique 🌸
         print(self.get_history()) 
 
-        return True
+        return True"""
+        # Récupération de la pièce suivante
+        next_room = self.current_room.exits.get(direction)
+
+        # Vérification si la pièce existe
+        if next_room is None:
+            print("\nAucune porte dans cette direction !\n")
+            return False
+
+        # Ajout de la pièce actuelle à l'historique
+        self.history.append(self.current_room)
+
+        # Mise à jour de la pièce actuelle
+        self.current_room = next_room
+
+        return True  # Retourne uniquement le succès du déplacement
     
     #🌸
     def undo(self):
