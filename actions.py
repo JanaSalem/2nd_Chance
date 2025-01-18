@@ -296,22 +296,55 @@ class Actions:
         del self.current_room.inventory[item_name]
         print(f"\nVous avez pris l'objet '{item_name}'.")"""
         
+        # l = len(list_of_words)
+        # player=game.player
+        # # If the number of parameters is incorrect, print an error message and return False.
+        # if l != number_of_parameters + 1:
+        #     command_word = list_of_words[0]
+        #     print(MSG1.format(command_word=command_word))
+        #     return False
+        
+        # if list_of_words[1] in player.current_room.inventory.keys():
+        #     player.inventory[list_of_words[1]]= player.current_room.inventory[list_of_words[1]]
+        #     del player.current_room.inventory[list_of_words[1]]
+        #     print()
+        #     print("tu viens de prendre {}".format(list_of_words[1]))
+        #     print()
+        # else:
+        #     print("cet item n'est pas disponible")
+        # return True
+        
         l = len(list_of_words)
-        player=game.player
-        # If the number of parameters is incorrect, print an error message and return False.
+        player = game.player
+        
+        # Vérification du nombre de paramètres
         if l != number_of_parameters + 1:
             command_word = list_of_words[0]
             print(MSG1.format(command_word=command_word))
             return False
         
-        if list_of_words[1] in player.current_room.inventory.keys():
-            player.inventory[list_of_words[1]]= player.current_room.inventory[list_of_words[1]]
-            del player.current_room.inventory[list_of_words[1]]
-            print()
-            print("tu viens de prendre {}".format(list_of_words[1]))
-            print()
+        item_name = list_of_words[1]
+        
+        if item_name in player.current_room.inventory.keys():
+            # Vérifier si l'objet a une quête associée
+            if item_name in game.quetes:
+                quest = game.quetes[item_name]
+                if quest.ask_question():
+                    # Ajouter l'objet à l'inventaire seulement si la quête est réussie
+                    player.inventory[item_name] = player.current_room.inventory[item_name]
+                    del player.current_room.inventory[item_name]
+                    print(f"\ntu viens de prendre {item_name}")
+                else:
+                    game.finished = True  # Terminer le jeu si la quête échoue
+                    return False
+            else:
+                # Si pas de quête, ajouter directement l'objet
+                player.inventory[item_name] = player.current_room.inventory[item_name]
+                del player.current_room.inventory[item_name]
+                print(f"\ntu viens de prendre {item_name}")
         else:
             print("cet item n'est pas disponible")
+        
         return True
    
     def drop(game, list_of_words, number_of_parameters):

@@ -6,6 +6,7 @@ from command import Command
 from actions import Actions
 from item import Item
 from character import Character
+from quest import Quest 
 #from config import DEBUG
 class Game:
     """
@@ -75,6 +76,9 @@ class Game:
         #self.characters = {} #🌟
         #self.direction_ensemble = set()
         self.valid_direction = set() # Initialise valid_direction comme un ensemble vide
+
+        self.quetes = {}
+
         #Ajout le dictionnaire des alias et des directions 
         self.direction_aliases = {
             "N": "N", "NORD": "N",
@@ -166,30 +170,47 @@ class Game:
         #Ajout des objets
         bougie = Item("bougie", "une bougie parfumée", 0.2)
         lettre = Item("lettre", "une lettre d'amour qui semble inachevé", 0.1)
-        receuil_de_poeme = Item("receuil de poèmes", "un livre ouvert et marqué par le temps qui semble avoir beaucoup servit est sur la table de chevet",0.5)
-        robe_paillette = Item("robe pailletté", "une robe pailleté rose bonbon est préparé sur un mannequin", 0.7)
+        poeme = Item("receuil de poèmes", "un livre ouvert et marqué par le temps qui semble avoir beaucoup servit est sur la table de chevet",0.5)
+        robe = Item("robe pailletté", "une robe pailleté rose bonbon est préparé sur un mannequin", 0.7)
         maquillage = Item("maquillage", "plusieurs trousses remplis de maquillage sont mis a disposition sur l'ilot se situant au mileu du dressing", 0.5)
-        fruits_enchantes= Item("fruits enchantés", "sur plusieurs arbres de la forêt tu peux apercevoir des fruits mystérieux qui semblent appétissant ils sont entouré de lumière, ils t'appellent", 4)
+        fruits= Item("fruits enchantés", "sur plusieurs arbres de la forêt tu peux apercevoir des fruits mystérieux qui semblent appétissant ils sont entouré de lumière, ils t'appellent", 4)
         partition = Item("partition", "tu trouves sur le piano une partition d'une mélodie qui te semblent mélodieuse", 1)
-        micro = Item("micro", "un micro traine dans la pièce il semble attendre quelqu'un de particulier", 1)
-        armes = Item("armes", "dans le fond de la pièce sur le mur tu vois une collection inéglable d'armes de toutes sortes et de toutes les tailles", 1)
-        poignard = Item("poignard", "Prendras-tu cette arme pour t'accompagner lors de ton aventure ?", 1)
+        #micro = Item("micro", "un micro traine dans la pièce il semble attendre quelqu'un de particulier", 1)
+        #armes = Item("armes", "dans le fond de la pièce sur le mur tu vois une collection inéglable d'armes de toutes sortes et de toutes les tailles", 1)
+        #poignard = Item("poignard", "Prendras-tu cette arme pour t'accompagner lors de ton aventure ?", 1)
         épée = Item("épée", "Prendras-tu cette arme pour t'accompagner lors de ton aventure ?", 1)
         arc = Item("arc et fléches", "Prendras-tu cette arme pour t'accompagner lors de ton aventure ?", 1)
-        revolver = Item("revolver", "Prendras-tu cette arme pour t'accompagner lors de ton aventure ?", 1)
+        #revolver = Item("revolver", "Prendras-tu cette arme pour t'accompagner lors de ton aventure ?", 1)
         tablette = Item("tablette portable", "Dans cette sombre pièce tou vois branché à l'ordinateur une tablette mystérieuse", 1)
-       
-       
+        chat = Item("chat bleu magique","Voudrai tu de la compagnie dans ton aventure?",1)
+        poison = Item("poison magique","Un peut de chance, on ne dis pas non...",1)
+        chocolat = Item("chocolat","J'éspère que tu n'est pas alérgique a cette merveille",1)
+
         salon.inventory['bougie'] = bougie
-        cave.inventory['armes','épée','poignard','revolver'] = armes, épée, poignard,revolver
+        #cave.inventory['armes'] = armes
+        cave.inventory['épée'] = épée
+        # cave.inventory['poignard'] = poignard
+        # cave.inventory['revolver'] = revolver
+        #cave.inventory['armes','épée','poignard','revolver'] = armes, épée, poignard,revolver
         bureau.inventory['tablette']=tablette
-        salle_musique.inventory ['partition','micro']=partition, micro
-        chambre.inventory['lettre','receuil_de_poeme']= lettre, receuil_de_poeme
-        dressing.inventory['robe_paillette','maquillage']= robe_paillette,maquillage
-        jungle.inventory['fruits_enchantes']=fruits_enchantes
+        #salle_musique.inventory ['partition','micro']=partition, micro
+        salle_musique.inventory['partition']=partition
+        #salle_musique.inventory['micro']=micro
+        jardin.inventory['chat']= chat
+        veranda.inventory['arc']= arc
+        #chambre.inventory['lettre','receuil_de_poeme']= lettre, receuil_de_poeme
+        #chambre.inventory['lettre']=lettre
+        chambre.inventory['poeme']=poeme
+        #dressing.inventory['robe_paillette','maquillage']= robe_paillette,maquillage
+        #dressing.inventory['robe_paillette']=robe_paillette
+        dressing.inventory['maquillage']=maquillage
+        dressing.inventory['robe']=robe
+        jungle.inventory['fruits']=fruits
+        plage.inventory['poison']=poison
+        villa.inventory['chocolat']=chocolat 
         
         # Setup Personnages
-        Beyonce = Character("Beyonce", "La star", salle_musique, ["don't forget to tell me"])
+        Beyonce = Character("Beyonce", "La star", salle_musique, ["don't forget to thank me"])
         Jack = Character("Jack Letombeur","Le seducteur endiablé",chambre,["Ravie d'avoir enfin la possibilité de te parler yeux dans les yeux"])
         Lloyde = Character("Lloyde","Le gameur déchu",bureau,["Jsuis occupé ferme les rideaux stp"])
         Orion = Character("Orion","Le scientifique fou",veranda,["Passe moi le bécher","Je suis un génie des sciences AHAHAHA"])
@@ -215,6 +236,47 @@ class Game:
         for room in self.rooms:
             for d in room.exits.keys():
                 self.valid_direction.add(d)
+
+
+#########################################################################################
+                # Configuration des quêtes
+        quest1 = Quest("Résolvez cette énigme pour activer la bougie:",
+                    "Convertissez 10111001 en décimal.", "185")
+        quest2 = Quest("Trouvez le mot de passe pour la tablette.",
+                    "Je suis un nombre a 4 chifre:\nMon 1er chiffre est la moitier de mon 2nd,\nLa somme de tous mes chiffres est 18,\nMon 2nd est égale à mon 3éme.\nMon dernier est mon 1er.\nQui suis-je?", "3663")
+        quest3 = Quest("Trouveras tu cette énigme?",
+                    "Je vole sans ailes,\nje pleure sans yeux.\nQui suis-je ?", "un nuage")
+        quest4 = Quest("Jouez la bonne mélodie.",
+                    "Quelle note est entre Fa et La ?", "Sol")
+        quest5 = Quest("Trouveras tu le bonne animal?.",
+                    "Je suis un prédateur silencieux,\nje vole la nuit et j'ai des yeux perçants.\nQui suis-je ?", "Un hibou")
+        quest6 = Quest("Essayez la robe scintillante.",
+                    "Quelle couleur mélange bleu et jaune ?", "Vert")
+        quest7 = Quest("Apprenez l'art du maquillage.",
+                    "Résolvez : 54 x 584", "31536")
+        quest8 = Quest("Hmmm, Question difficil:",
+                    "Quelle est l'emblème du roi soleil (Louis XIV)?", "astre solaire")
+        quest9 = Quest("La réponce est tellement logique:",
+                    "Quelle est la meuilleur classe prépa?", "PSI")
+        quest10 = Quest("Réfléchi un peut....",
+                    "Girafe = 3,\nÉléphant = 3,\nHippopotame = 5,\nLion = … ?", "2")
+        quest11 = Quest("Une facile pour toi :",
+                    "Qu'est-ce qui est plein de trous mais arrive quand même à retenir l'eau ?", "Une éponge")
+
+        # Association des quêtes aux objets
+        self.quetes = {
+            'bougie': quest1,
+            'tablette': quest2,
+            'receuil': quest3,
+            'partition': quest4,
+            'fruits': quest5,
+            'robe': quest6,
+            'maquillage': quest7,
+            'épée': quest8,
+            'chat': quest9,
+            'arc': quest10,
+            'poison': quest11
+        }
 
         # Configuration du joueur , setup player and starting room
         self.player = Player(input("\nEntrez votre nom: "))
