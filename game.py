@@ -329,14 +329,14 @@ class Game:
         quest4 = Quest("🎵 Jouez la bonne mélodie.",
                     "Quelle note est entre Do et Mi ?", "Ré")
 
-        """quest5 = Quest("🤔Trouveras-tu le bon animal ?",
-                    "Je suis un prédateur silencieux,\nje vole la nuit et j'ai des yeux perçants.\nQui suis-je ?", "Un hibou")
+        #quest5 = Quest("🤔Trouveras-tu le bon animal ?",
+                    #"Je suis un prédateur silencieux,\nje vole la nuit et j'ai des yeux perçants.\nQui suis-je ?", "Un hibou")
 
-        quest7 = Quest("💄 Apprenez l'art du maquillage.",
-                    "Résolvez : 54 × 584", "31536")
+        #quest7 = Quest("💄 Apprenez l'art du maquillage.",
+                    #"Résolvez : 54 × 584", "31536")
 
-        quest8 = Quest("👑 Hmm, question difficile :",
-                    "Quelle est l'emblème du Roi Soleil (Louis XIV) ?", "astre solaire")"""
+        #quest8 = Quest("👑 Hmm, question difficile :",
+                    #"Quelle est l'emblème du Roi Soleil (Louis XIV) ?", "astre solaire")
 
         quest9 = Quest("🎓 La réponse est tellement logique :",
                     "Quelle est la meilleure classe prépa ?", "PSI")
@@ -493,6 +493,7 @@ class Game:
                 else:
                     print(f"\n'{list_of_words[1]}' n'est pas une direction valide.")
                     return
+
 
     def print_welcome(self): # NOUVEAU
         """

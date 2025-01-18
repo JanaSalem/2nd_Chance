@@ -1,97 +1,118 @@
+"""Module définissant les pièces du jeu d'aventure.
+
+Ce module contient la classe Room qui représente les différentes pièces
+du jeu, leurs connexions et leur contenu.
+"""
+
 from PIL import Image
-# Define the Room class.
+
 
 class Room:
+    """Classe représentant une pièce dans le jeu d'aventure.
 
-    # Define the constructor. 
-    def __init__(self, name, description, exits):
+    Cette classe gère les attributs et comportements d'une pièce, incluant
+    sa description, ses sorties, son inventaire et les personnages présents.
+
+    Attributes:
+        name (str): Nom de la pièce.
+        description (str): Description détaillée de la pièce.
+        exits (dict): Dictionnaire des sorties disponibles.
+        inventory (dict): Inventaire des objets présents dans la pièce.
+        characters (dict): Dictionnaire des personnages présents.
+        visited (bool): Indique si la pièce a été visitée.
+        image_path (str): Chemin vers l'image associée à la pièce.
+    """
+
+    def __init__(self, name: str, description: str, exits: dict):
+        """Initialise une nouvelle pièce.
+
+        Args:
+            name (str): Nom de la pièce.
+            description (str): Description de la pièce.
+            exits (dict): Dictionnaire initial des sorties.
+        """
         self.name = name
         self.description = description
         self.exits = {}
-        #self.inventory_room = set() #room🌟
-        self.inventory=dict()
+        self.inventory = {}
         self.characters = {}
-        self.visited = False #par defauts, la pièce n'est pas visitée
-        self.image_path = None #Chemin vers une image associée 
-    
-    # Define the get_exit method.
-    def get_exit(self, direction):
+        self.visited = False
+        self.image_path = None
 
-        # Return the room in the given direction if it exists.
-        if direction in self.exits.keys():
-            return self.exits[direction]
-        else:
-            return None
-    
-    # Return a string describing the room's exits.
-    def get_exit_string(self):
-        exit_string = "Sorties: " 
-        for exit in self.exits.keys():
-            if self.exits.get(exit) is not None:
-                exit_string += exit + ", "
-        exit_string = exit_string.strip(", ")
-        return exit_string
+    def get_exit(self, direction: str) -> 'Room':
+        """Retourne la pièce accessible dans la direction donnée.
 
-    # Return a long description of this room including exits.
-    def get_long_description(self):
+        Args:
+            direction (str): Direction souhaitée.
+
+        Returns:
+            Room: Pièce dans la direction donnée ou None si pas de sortie.
+        """
+        return self.exits.get(direction)
+
+    def get_exit_string(self) -> str:
+        """Retourne une description des sorties disponibles.
+
+        Returns:
+            str: Liste formatée des sorties disponibles.
+        """
+        available_exits = [exit_dir for exit_dir, room in self.exits.items()
+                         if room is not None]
+        return "Sorties: " + ", ".join(available_exits)
+
+    def get_long_description(self) -> str:
+        """Retourne une description détaillée de la pièce.
+
+        Returns:
+            str: Description incluant la pièce et ses sorties.
+        """
         return f"\nVous êtes dans {self.description}\n\n{self.get_exit_string()}\n"
-    
 
-    # Ajouter un objet à l'inventaire de la pièce
-    def add_item(self, item):
+    def add_item(self, item) -> None:
+        """Ajoute un objet à l'inventaire de la pièce.
+
+        Args:
+            item: Objet à ajouter à l'inventaire.
+        """
         self.inventory[item.name] = item
 
-    def remove_item(self, item_name):
-        if item_name in self.inventory:
-            del self.inventory[item_name]
+    def remove_item(self, item_name: str) -> None:
+        """Retire un objet de l'inventaire de la pièce.
 
-    # Ajouter un personnage à la pièce
-    def add_character(self, character):
-        self.characters[character.name.lower()] = character  # Utilisation de .lower() pour les comparaisons insensibles à la casse
+        Args:
+            item_name (str): Nom de l'objet à retirer.
+        """
+        self.inventory.pop(item_name, None)
 
-    def show_image(self):
-        """Affiche l'image associée à la pièce, si elle existe."""
-        if self.image_path:
-            try:
-                img = Image.open(self.image_path)
-                img.show()  # Affiche l'image
-            except Exception as e:
-                print(f"Erreur lors de l'affichage de l'image : {e}")
+    def add_character(self, character) -> None:
+        """Ajoute un personnage à la pièce.
 
-    
+        Args:
+            character: Personnage à ajouter à la pièce.
+        """
+        self.characters[character.name.lower()] = character
 
-    def print_inventory(self): #room 🌟
-        """if len(self.inventory) == 0:
-            print("Ce lieu ne contient aucun item : L'inventaire est vide.")
-            return True
-        
-        print("\nLa pièce contient :\n")
-        for i in self.inventory:
-            print("   ", i.name, ":", i.description)
+    def show_image(self) -> None:
+        """Affiche l'image associée à la pièce si elle existe."""
+        if not self.image_path:
+            return
 
-        if self.characters:
-            print("\nVous remarquez également :")
-            for character in self.characters.values():
-                print(f"    {character.name} : {character.description}")
-            
-        return True"""
-        
-        """#donne l'inventaire du joueur
-        if  not self.inventory:
-            print("Votre inventaire est vide")
-            return 
-        else :
-            for key ,item in self.inventory.items():
-                print("vous avez dns votre inventaire:\n", item,) """
-        if  not self.inventory:
+        try:
+            img = Image.open(self.image_path)
+            img.show()
+        except Exception as error:
+            print(f"Erreur lors de l'affichage de l'image : {error}")
+
+    def print_inventory(self) -> None:
+        """Affiche le contenu de l'inventaire de la pièce."""
+        if not self.inventory:
             print("vide")
-            return 
-        else :
-            print()
-            print("On voit :")
-            for key ,item in self.inventory.items():
-                print(f"   {item.name} : {item.description}")
+            return
 
-    def print_description(self):
-        """Affiche la description de la pièce"""
+        print("\nOn voit :")
+        for item in self.inventory.values():
+            print(f"   {item.name} : {item.description}")
+
+    def print_description(self) -> None:
+        """Affiche la description de la pièce."""
         print(self.description)
