@@ -154,7 +154,7 @@ class Player():
         # Set the current room to the next room.
         self.current_room = next_room
         Player.get_history(self)
-        print(self.current_room.get_long_description())
+        
  
         return True
     

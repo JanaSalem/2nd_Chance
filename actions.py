@@ -65,11 +65,11 @@ class Actions:
             player.move(direction)
             player.current_room.visited = True #???
             # Afficher la description de la pièce actuelle
-            print(player.current_room.description)
+            print(player.current_room.get_long_description())
             #Affiche description de la pièce actuelle
             if not player.current_room.visited:
                 player.current_room.show_image()
-            print(f"\nSorties: {', '.join(player.current_room.exits.keys())}\n")
+            #print(f"\nSorties: {', '.join(player.current_room.exits.keys())}\n")
 
             
         else:
