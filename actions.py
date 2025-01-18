@@ -23,6 +23,7 @@ MSG1 = "\nLa commande '{command_word}' prend 1 seul paramètre.\n"
 
 class Actions:
 
+    @staticmethod #NOUVEAUJ
     def go(game, list_of_words, number_of_parameters):
         """
         Move the player in the direction specified by the parameter.
@@ -35,45 +36,35 @@ class Actions:
 
         Returns:
             bool: True if the command was executed successfully, False otherwise.
-
-        Examples:
-        
-        >>> from game import Game
-        >>> game = Game()
-        >>> game.setup()
-        >>> go(game, ["go", "N"], 1)
-        True
-        >>> go(game, ["go", "N", "E"], 1)
-        False
-        >>> go(game, ["go"], 1)
-        False
-
         """
         
         player = game.player
         l = len(list_of_words)
+        
         # If the number of parameters is incorrect, print an error message and return False.
         if l != number_of_parameters + 1:
             command_word = list_of_words[0]
             print(MSG1.format(command_word=command_word))
             return False
 
-        # Get the direction from the list of words.
-        direction = list_of_words[1]
+        # Get the direction from the list of words and convert to uppercase
+        direction = list_of_words[1].upper()  # Convertir en majuscules
+        
+        # Vérifier si la direction est dans les alias et la convertir si nécessaire
+        if direction in game.direction_aliases:
+            direction = game.direction_aliases[direction]
+            
         if direction in player.current_room.exits:
             # Move the player in the direction specified by the parameter.
             player.move(direction)
-            player.current_room.visited = True #???
+            player.current_room.visited = True
             # Afficher la description de la pièce actuelle
             print(player.current_room.get_long_description())
-            #Affiche description de la pièce actuelle
             if not player.current_room.visited:
                 player.current_room.show_image()
-            #print(f"\nSorties: {', '.join(player.current_room.exits.keys())}\n")
-
-            
         else:
             print("Direction non valide veuillez réessayer")
+        
         return True
 
         """if direction not in player.current_room.exits:
@@ -295,24 +286,6 @@ class Actions:
         # Retire l'objet de la pièce (ou le met dans l'inventaire de la pièce)
         del self.current_room.inventory[item_name]
         print(f"\nVous avez pris l'objet '{item_name}'.")"""
-        
-        # l = len(list_of_words)
-        # player=game.player
-        # # If the number of parameters is incorrect, print an error message and return False.
-        # if l != number_of_parameters + 1:
-        #     command_word = list_of_words[0]
-        #     print(MSG1.format(command_word=command_word))
-        #     return False
-        
-        # if list_of_words[1] in player.current_room.inventory.keys():
-        #     player.inventory[list_of_words[1]]= player.current_room.inventory[list_of_words[1]]
-        #     del player.current_room.inventory[list_of_words[1]]
-        #     print()
-        #     print("tu viens de prendre {}".format(list_of_words[1]))
-        #     print()
-        # else:
-        #     print("cet item n'est pas disponible")
-        # return True
         
         l = len(list_of_words)
         player = game.player

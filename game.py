@@ -134,17 +134,17 @@ class Game:
 
 
         # Configuration des pièces
-        salon = Room("Salon", "le salon,un espace chaleureux et lumineux au cœur de la maison, entouré de baies vitrées donnant sur la nature luxuriante .","Images/sallon_jeu.jpeg")
-        cave = Room("Cave", " la cave, un endroit sombre et frais où se trouvent des objets anciens et des armes de toutes sortes.","Images/cave_jeu.jpeg")
-        bureau = Room("Bureau", "le bureau, un lieu tranquille, entouré de Led de toutes les couleurs eclairant seules la pieces au centre plusieurs pc gamers pour un setup des plus immersifs.","Images/bureau_jeu")
-        salle_musique = Room("Salle de Musique", "une salle remplie d'instruments ,d'un piano qui résonne harmonieusement et d'un micro demandant d'acceuillir les plus belles voix.","Images/salle_de_musique")
-        jardin = Room("Jardin", "un jardin, un espace verdoyant où les plantes tropicales prospèrent.","Images/jardin.jpeg")
-        veranda = Room("Véranda", "un endroit ouvert sur l'île, offrant une vue paisible sur la jungle et la plage qui est rempli d'intruments scientifiques des plus étranges.","Images/veranda_jeu.jpeg")
-        chambre = Room("Chambre", "un refuge confortable avec un lit balladaquin ayant une vue maginifique sur le jardin.","Images/chambre_jeu.jpeg")
-        dressing = Room("Dressing", "un endroit rempli de vêtements et d'accessoires de luxe, soigneusement organisés.","Images/dresing_jeu.jpeg")
-        jungle = Room("Jungle", "un lieu dense et mystérieux rempli de faune exotique et mystique.","Images/jungle_jeu.jpeg")
-        plage = Room("Plage", "un endroit idyllique, où le sable chaud rencontre la mer turquoise.","Images/plage_image.jpeg")
-        villa = Room("Villa", "la Villa, le point central de vie sur l'île, accueillant et protégé.","Images/villa_jeu.jpeg")
+        salon = Room("Salon", "le salon🛋️,un espace chaleureux et lumineux au cœur de la maison, entouré de baies vitrées donnant sur la nature luxuriante .","Images/sallon_jeu.jpeg")
+        cave = Room("Cave", " la cave 🔦🦇, un endroit sombre et frais où se trouvent des objets anciens et des armes de toutes sortes.","Images/cave_jeu.jpeg")
+        bureau = Room("Bureau", "le bureau🧑🏻‍💻, un lieu tranquille, entouré de Led de toutes les couleurs eclairant seules la pieces au centre plusieurs pc gamers pour un setup des plus immersifs.","Images/bureau_jeu")
+        salle_musique = Room("Salle de Musique", "une salle remplie d'instruments 𝄞 ,d'un piano qui résonne harmonieusement et d'un micro demandant d'acceuillir les plus belles voix.","Images/salle_de_musique")
+        jardin = Room("Jardin", "un jardin, ˚˖𓍢ִ໋🍃✧˚.💚 un espace verdoyant où les plantes tropicales prospèrent.˚˖𓍢ִ໋🍃✧˚.💚⋆","Images/jardin.jpeg")
+        veranda = Room("Véranda", "la véranda🧺🏚️🍂, un endroit ouvert sur l'île, offrant une vue paisible sur la jungle et la plage qui est rempli d'intruments scientifiques des plus étranges.","Images/veranda_jeu.jpeg")
+        chambre = Room("Chambre", "la chambre🚪🛏️,un refuge confortable avec un lit balladaquin ayant une vue maginifique sur le jardin.","Images/chambre_jeu.jpeg")
+        dressing = Room("Dressing", "👗👔un endroit rempli de vêtements et d'accessoires de luxe, soigneusement organisés.","Images/dresing_jeu.jpeg")
+        jungle = Room("Jungle", "La Jungle,🏝️🦜🌊 🦍🐒un lieu dense et mystérieux rempli de faune exotique et mystique.","Images/jungle_jeu.jpeg")
+        plage = Room("Plage", "La plage, 🌴🍹🍉⛱️🥥un endroit idyllique, où le sable chaud rencontre la mer turquoise.","Images/plage_image.jpeg")
+        villa = Room("Villa", "🏡la Villa, le point central de vie sur l'île, accueillant et protégé.","Images/villa_jeu.jpeg")
 
 
         # Ajouter les pièces à la liste des pièces
@@ -168,53 +168,43 @@ class Game:
         #Images/sallon_jeu.jpg
     
 
-        #Ajout des objets
-        bougie = Item("bougie", "une bougie parfumée", 0.2)
-        lettre = Item("lettre", "une lettre d'amour qui semble inachevé", 0.1)
-        poeme = Item("receuil de poèmes", "un livre ouvert et marqué par le temps qui semble avoir beaucoup servit est sur la table de chevet",0.5)
-        robe = Item("robe pailletté", "une robe pailleté rose bonbon est préparé sur un mannequin", 0.7)
-        maquillage = Item("maquillage", "plusieurs trousses remplis de maquillage sont mis a disposition sur l'ilot se situant au mileu du dressing", 0.5)
-        fruits= Item("fruits enchantés", "sur plusieurs arbres de la forêt tu peux apercevoir des fruits mystérieux qui semblent appétissant ils sont entouré de lumière, ils t'appellent", 4)
-        partition = Item("partition", "tu trouves sur le piano une partition d'une mélodie qui te semblent mélodieuse", 1)
-        #micro = Item("micro", "un micro traine dans la pièce il semble attendre quelqu'un de particulier", 1)
-        #armes = Item("armes", "dans le fond de la pièce sur le mur tu vois une collection inéglable d'armes de toutes sortes et de toutes les tailles", 1)
-        #poignard = Item("poignard", "Prendras-tu cette arme pour t'accompagner lors de ton aventure ?", 1)
-        épée = Item("épée", "Prendras-tu cette arme pour t'accompagner lors de ton aventure ?", 1)
-        arc = Item("arc et fléches", "Prendras-tu cette arme pour t'accompagner lors de ton aventure ?", 1)
-        #revolver = Item("revolver", "Prendras-tu cette arme pour t'accompagner lors de ton aventure ?", 1)
-        tablette = Item("tablette portable", "Dans cette sombre pièce tou vois branché à l'ordinateur une tablette mystérieuse", 1)
-        chat = Item("chat bleu magique","Voudrai tu de la compagnie dans ton aventure?",1)
-        poison = Item("poison magique","Un peut de chance, on ne dis pas non...",1)
-        chocolat = Item("chocolat","J'éspère que tu n'est pas alérgique a cette merveille",1)
+        #Ajout des objets pou un jeu plus long 
+        # #épée = Item("épée", "Prendras-tu cette arme pour t'accompagner lors de ton aventure ?", 1)
+        # #maquillage = Item("maquillage", "plusieurs trousses remplis de maquillage sont mis a disposition sur l'ilot se situant au mileu du dressing", 0.5)
+        # #fruits= Item("fruits enchantés", "sur plusieurs arbres de la forêt tu peux apercevoir des fruits mystérieux qui semblent appétissant ils sont entouré de lumière, ils t'appellent", 4)
+        
+        poison = Item("poison magique🐟","Un peut de chance, on ne dis pas non...",1)
+        chocolat = Item("chocolat🍫","J'éspère que tu n'est pas alérgique a cette merveille",1)
+        bougie = Item("bougie🕯️", "une bougie parfumée", 0.2)
+        receuil = Item("receuil de poèmes📜🪶", "un livre ouvert et marqué par le temps qui semble avoir beaucoup servit est sur la table de chevet",0.5)
+        tablette = Item("tablette portable📱", "Dans cette sombre pièce tou vois branché à l'ordinateur une tablette mystérieuse", 1)
+        partition = Item("partition 🎻", "tu trouves sur le piano une partition d'une mélodie qui te semblent mélodieuse", 1)
+        chat = Item("chat bleu magique 🐈‍⬛","Voudrai tu de la compagnie dans ton aventure?",1)
+        arc = Item("arc et fléches🏹", "Prendras-tu cette arme pour t'accompagner lors de ton aventure ?", 1)
 
+
+        plage.inventory['poison']=poison
+        villa.inventory['chocolat']=chocolat
         salon.inventory['bougie'] = bougie
-        #cave.inventory['armes'] = armes
-        cave.inventory['épée'] = épée
-        # cave.inventory['poignard'] = poignard
-        # cave.inventory['revolver'] = revolver
-        #cave.inventory['armes','épée','poignard','revolver'] = armes, épée, poignard,revolver
+        chambre.inventory['receuil']=receuil
         bureau.inventory['tablette']=tablette
-        #salle_musique.inventory ['partition','micro']=partition, micro
         salle_musique.inventory['partition']=partition
-        #salle_musique.inventory['micro']=micro
         jardin.inventory['chat']= chat
         veranda.inventory['arc']= arc
-        #chambre.inventory['lettre','receuil_de_poeme']= lettre, receuil_de_poeme
-        #chambre.inventory['lettre']=lettre
-        chambre.inventory['poeme']=poeme
-        #dressing.inventory['robe_paillette','maquillage']= robe_paillette,maquillage
-        #dressing.inventory['robe_paillette']=robe_paillette
-        dressing.inventory['maquillage']=maquillage
-        dressing.inventory['robe']=robe
-        jungle.inventory['fruits']=fruits
-        plage.inventory['poison']=poison
-        villa.inventory['chocolat']=chocolat 
+
+        #si on veux un jeu plus long 
+        # cave.inventory['épée'] = épée
+        # jardin.inventory['chat']= chat
+        # veranda.inventory['arc']= arc
+        # dressing.inventory['maquillage']=maquillage
+        # jungle.inventory['fruits']=fruits
+
         
         # Setup Personnages
-        Beyonce = Character("Beyonce", "La star", salle_musique, ["\nJe suis une star tout le monde me connaît je suis reconnu partout où je vais,cette maison n'est pas à ma hauteur,\nM'observe pas comme ça tu devrais plutôt aller voir Orion.\nJ'ai entendu dire qu'il était devenu fou et avait inventé des sérums pour 'faire rajeunir les gens' mais qu'il les défigurait à la place pour que tout le monde lui ressemble .\nTu es surpris de ce que tu apprends,certes il est toujours enfermé dans la veranda comme-ci personne ne pouvait le voir"])
-        Jack = Character("Jack Letombeur","Le seducteur endiablé",chambre,["Ravie d'avoir enfin la possibilité de te parler yeux dans les yeux mon/ma jolie.\nPourquoi veux-tu t'éloigner de moi?, reste je sais ce que tu veux c'est bon je serais calme.\nComme je suis si beau Beyonce s'est confié je sais qu'elle n'a pas hésiter à éliminer des gens sur son passage pour être la star qu'elle est"])
-        Lloyde = Character("Lloyde","Le gameur déchu",bureau,["\nFerme la porte je travailles.\nJe sais ce que tu veux si tu reviens plus jamais me voir je te le dis.\nJ'ai fait mes recherches, Méfie de toi de Jack il a pour habitude de profiter de ses 'charmes'pour arnaquer les gens.\n Il va très loin et promets le grand amour puis les quittes en prenant l'argent et certains de desespoir amoureux sont morts. "])
-        Orion = Character("Orion","Le scientifique fou",veranda,["\nAHAHAH je t'attendais mon petit, tu es gênés de me voir defiguré ? C'est pas grave j'ai l'habitude.\nObserve un vrai laboratoire de VRAI science pas comme ce que fait ce hacker de Lloyde, tu sais qu'il travaillais dans la vente d'armes pour des terroristes sur le darkweb ? Mais bien sûr pour lui c'est normal même si des milliers de personnes meurent par sa faute."])
+        Beyonce = Character("Beyonce", "La star ⭐", salle_musique, ["\nJe suis une star tout le monde me connaît je suis reconnu partout où je vais,cette maison n'est pas à ma hauteur,\nM'observe pas comme ça tu devrais plutôt aller voir Orion.\nJ'ai entendu dire qu'il était devenu fou et avait inventé des sérums pour 'faire rajeunir les gens' mais qu'il les défigurait à la place pour que tout le monde lui ressemble .\nTu es surpris de ce que tu apprends,certes il est toujours enfermé dans la veranda comme-ci personne ne pouvait le voir"])
+        Jack = Character("Jack Letombeur","Le seducteur endiablé ❤️",chambre,["Ravie d'avoir enfin la possibilité de te parler yeux dans les yeux mon/ma jolie.\nPourquoi veux-tu t'éloigner de moi?, reste je sais ce que tu veux c'est bon je serais calme.\nComme je suis si beau Beyonce s'est confié je sais qu'elle n'a pas hésiter à éliminer des gens sur son passage pour être la star qu'elle est"])
+        Lloyde = Character("Lloyde","Le gameur déchu🎮",bureau,["\nFerme la porte je travailles.\nJe sais ce que tu veux si tu reviens plus jamais me voir je te le dis.\nJ'ai fait mes recherches, Méfie de toi de Jack il a pour habitude de profiter de ses 'charmes'pour arnaquer les gens.\n Il va très loin et promets le grand amour puis les quittes en prenant l'argent et certains de desespoir amoureux sont morts. "])
+        Orion = Character("Orion","Le scientifique fou ⚛︎ 🧬 🧫 🧪",veranda,["\nAHAHAH je t'attendais mon petit, tu es gênés de me voir defiguré ? C'est pas grave j'ai l'habitude.\nObserve un vrai laboratoire de VRAI science pas comme ce que fait ce hacker de Lloyde, tu sais qu'il travaillais dans la vente d'armes pour des terroristes sur le darkweb ? Mais bien sûr pour lui c'est normal même si des milliers de personnes meurent par sa faute."])
        
         #Setup personnage par lieux
         """salle_musique.characters[Beyonce.name] = Beyonce
@@ -240,28 +230,35 @@ class Game:
 
 
 #########################################################################################
-                # Configuration des quêtes
-        quest1 = Quest("Résolvez cette énigme pour activer la bougie:",
+                        # Configuration des quêtes 🎮
+        quest1 = Quest("🕯️ Résolvez cette énigme pour activer la bougie:",
                     "Convertissez 10111001 en décimal.", "185")
-        quest2 = Quest("Trouvez le mot de passe pour la tablette.",
-                    "Je suis un nombre a 4 chifre:\nMon 1er chiffre est la moitier de mon 2nd,\nLa somme de tous mes chiffres est 18,\nMon 2nd est égale à mon 3éme.\nMon dernier est mon 1er.\nQui suis-je?", "3663")
-        quest3 = Quest("Trouveras tu cette énigme?",
+
+        quest2 = Quest("📱 Trouvez le mot de passe pour la tablette.",
+                    "Je suis un nombre à 4 chiffres:\nMon 1er chiffre est la moitié de mon 2nd,\nLa somme de tous mes chiffres est 18,\nMon 2nd est égal à mon 3ème.\nMon dernier est mon 1er.\nQui suis-je?", "3663")
+
+        quest3 = Quest("🤔 Trouveras-tu cette énigme ?",
                     "Je vole sans ailes,\nje pleure sans yeux.\nQui suis-je ?", "un nuage")
-        quest4 = Quest("Jouez la bonne mélodie.",
+
+        quest4 = Quest("🎵 Jouez la bonne mélodie.",
                     "Quelle note est entre Do et Mi ?", "Ré")
-        quest5 = Quest("Trouveras tu le bonne animal?.",
+
+        quest5 = Quest("🤔Trouveras-tu le bon animal ?",
                     "Je suis un prédateur silencieux,\nje vole la nuit et j'ai des yeux perçants.\nQui suis-je ?", "Un hibou")
-        quest6 = Quest("Essayez la robe scintillante.",
-                    "Quelle couleur mélange bleu et jaune ?", "Vert")
-        quest7 = Quest("Apprenez l'art du maquillage.",
-                    "Résolvez : 54 x 584", "31536")
-        quest8 = Quest("Hmmm, Question difficille:",
-                    "Quelle est l'emblème du roi soleil (Louis XIV)?", "astre solaire")
-        quest9 = Quest("La réponce est tellement logique:",
-                    "Quelle est la meuilleure classe prépa?", "PSI")
-        quest10 = Quest("Réfléchi un peut....",
+
+        quest7 = Quest("💄 Apprenez l'art du maquillage.",
+                    "Résolvez : 54 × 584", "31536")
+
+        quest8 = Quest("👑 Hmm, question difficile :",
+                    "Quelle est l'emblème du Roi Soleil (Louis XIV) ?", "astre solaire")
+
+        quest9 = Quest("🎓 La réponse est tellement logique :",
+                    "Quelle est la meilleure classe prépa ?", "PSI")
+
+        quest10 = Quest("🧩 Réfléchis un peu...",
                     "Girafe = 3,\nÉléphant = 3,\nHippopotame = 5,\nLion = … ?", "2")
-        quest11 = Quest("Une facile pour toi :",
+
+        quest11 = Quest("💫 Une facile pour toi :",
                     "Qu'est-ce qui est plein de trous mais arrive quand même à retenir l'eau ?", "Une éponge")
 
         # Association des quêtes aux objets
@@ -270,10 +267,9 @@ class Game:
             'tablette': quest2,
             'receuil': quest3,
             'partition': quest4,
-            'fruits': quest5,
-            'robe': quest6,
-            'maquillage': quest7,
-            'épée': quest8,
+            #'fruits': quest5,
+            #'maquillage': quest7,
+            #'épée': quest8,
             'chat': quest9,
             'arc': quest10,
             'poison': quest11
@@ -288,25 +284,22 @@ class Game:
         #met à jour les directions valides selon la pièce où est le joueur
         self.valid_direction = set(self.player.current_room.exits.keys())
 
-       
-    def play(self):
-        """"
-        """
-        #Démarre le jeu, affiche le message de bienvenue et lance la boucle principale.
-        
+    def play(self): #NOUVEAU
+        """Démarre le jeu et gère la boucle principale"""
         self.setup()
         self.print_welcome()
+        
         while not self.finished:
-        #Gérer les déplacements des PNJ
-            """for character in self.characters.values(): #
-                print(character)
-                if isinstance(character, Character):  # Vérifie que c'est un PNJ
-                    moved = character.move()  # Appelle leur méthode move()
-                    if moved:
-                        print(f"{character.name} s'est déplacé dans une autre pièce.")"""  # Message optionnel
+            if self.check_end_game_conditions() and not self.final_riddle_shown:
+                self.show_final_riddle()
+                if self.finished:  # Si l'énigme finale est résolue
+                    break  # Sort de la boucle immédiatement
             
+            # Attendre la commande de l'utilisateur sans réafficher la description
             self.process_command(input("> "))
-        return None 
+
+
+
         """while True:
             # Afficher la description de la pièce et les objets présents
             self.player.current_room.print_inventory_room()
@@ -370,11 +363,11 @@ class Game:
             if DEBUG:
                 print("DEBUG: Fin du tour.")"""
 
-    def check_end_game_conditions(self):
+    def check_end_game_conditions(self): # NOUVEAU
         """Vérifie si toutes les conditions de fin de jeu sont remplies"""
         # Liste de tous les objets requis (excluant les personnages)
-        required_items = {'bougie', 'tablette', 'receuil', 'partition', 'fruits', 
-                         'robe', 'maquillage', 'épée', 'chat', 'arc', 'poison', 'chocolat'}
+        required_items = {'bougie', 'tablette', 'receuil', 'partition', 
+                         'chat', 'arc', 'poison', 'chocolat'}
         
         # Liste de tous les personnages
         all_characters = {'beyonce', 'jack', 'lloyde', 'orion'}
@@ -387,6 +380,8 @@ class Game:
         talked_to_all = self.all_characters_talked == all_characters
         
         return has_all_items and talked_to_all
+
+
     def show_final_riddle(self):
         """Affiche l'énigme finale du jeu"""
         if not self.final_riddle_shown:
@@ -400,61 +395,69 @@ class Game:
             print("Qui suis-je?\n")
             
             reponse = input("Votre réponse: ").lower().strip()
+            
             if reponse == "la villa":  # La réponse à l'énigme finale
                 print("\n🎉 VICTOIRE ! 🎉")
                 print("Vous avez percé le mystère de la villa et de ses habitants !")
-                print("Chaque personnage cachait une part de vérité, mais ensemble,")
-                print("ils racontent l'histoire d'une communauté brisée par les secrets et les mensonges.")
+                print("Chaque personnage a oublié son passé sombre. Vous êtes le seul qui a essayé de percer les mystères de l'île.")
+                print("Les autres ont préféré rester dans le confort et ne pas chercher la vérité.")
+                print("Sauf que ce que personne ne savait, c'est que cette île était leur seconde et dernière chance de vivre une belle vie pour pardonner leurs crimes.")
+                
+                while True:
+                    print("\n⚠️ Une décision cruciale vous attend ⚠️")
+                    print("\nVous avez deux choix :")
+                    print("1. 🏝️ Rester sur l'île et oublier votre passé comme les autres")
+                    print("2. 🚪 Partir et retourner à votre vie d'avant")
+                    
+                    choix = input("\nVotre choix (1 ou 2): ").strip()
+                    
+                    if choix == "1":
+                        print("\n🌅 Vous choisissez de rester sur l'île...")
+                        print("Vos souvenirs commencent doucement à s'effacer...")
+                        print("Vous rejoignez les autres habitants dans leur paisible ignorance.")
+                        print("\n🔚 FIN : Le Paradis Artificiel 🌴")
+                        break
+                    elif choix == "2":
+                        print("\n🌊 Vous choisissez de partir...")
+                        print("En quittant l'île, tous vos souvenirs reviennent.")
+                        print("Vous vous rappelez de tout, y compris des raisons qui vous ont amené ici.")
+                        print("Cette vérité sera votre fardeau à porter.")
+                        print("\n🔚 FIN : Le Prix de la Vérité 🎭")
+                        break
+                    else:
+                        print("\n❌ Choix invalide. Veuillez choisir 1 ou 2.")
+                
                 self.finished = True
             else:
-                print("\nCe n'est pas la bonne réponse... Continuez d'explorer pour comprendre le mystère.")
+                print("\n❌ Ce n'est pas la bonne réponse... Continuez d'explorer pour comprendre le mystère.")
+            
             self.final_riddle_shown = True
 
 
     def process_command(self, command_string: str) -> None:
-        """
-        Analyse et exécute une commande entrée par le joueur.
-
-
-        Paramètres:
-        -----------
-        command_string : str
-            La commande entrée par le joueur, sous forme de chaîne de caractères.
-        """
-        # Supprime les espaces au début et à la fin de la chaîne de commande
-        #command_string = command_string.strip().lower()
+        """Analyse et exécute une commande entrée par le joueur"""
+        # Ne traite pas les commandes si le jeu est terminé
+        if self.finished:
+            return
+            
         list_of_words = command_string.split(" ")
-
         command_word = list_of_words[0]
 
         if command_word == "talk" and len(list_of_words) > 1:
             character_name = list_of_words[1].lower()
             self.all_characters_talked.add(character_name)
-        
-        if self.check_end_game_conditions() and not self.final_riddle_shown:
-            self.show_final_riddle()
 
-        """# Si la commande est vide, ne rien faire et retourner immédiatement
-        if not command_string:
-            return
-        # Sépare la chaîne de commande en une list* de mots (par exemple "go N" devient ["go", "N"])
-        list_of_words = command_string.split(" ")
-        # Récupère le premier mot, qui est le mot de commande (par exemple "go")
-        command_word = list_of_words[0]"""
-        # If the command is not recognized, print an error message
         if command_word not in self.commands.keys():
             print(f"\nCommande '{command_word}' non reconnue. Entrez 'help' pour voir la liste des commandes disponibles.\n")
-        # If the command is recognized, execute it
         else:
             command = self.commands[command_word]
             command.action(self, list_of_words, command.number_of_parameters)
 
         if command_word == 'go':
-            #Met la direction sous le bon format si besoin
-            if len(list_of_words) > 1: #Condition permets de vérifier si le joueur a bien entré un deuxième mot après la commande(premier mot go et le deuxième N,..)
-                raw_valid_direction = list_of_words[1].upper()  # Convertir en majuscules, et les stockes
-                if raw_valid_direction in self.direction_aliases: # un dictionnaire où les clés sont les alias des directions
-                    list_of_words[1] = self.direction_aliases[raw_valid_direction]  # Mapper vers la direction standard
+            if len(list_of_words) > 1:
+                raw_valid_direction = list_of_words[1].upper()
+                if raw_valid_direction in self.direction_aliases:
+                    list_of_words[1] = self.direction_aliases[raw_valid_direction]
                 else:
                     print(f"\n'{list_of_words[1]}' n'est pas une direction valide.")
                     return
@@ -484,17 +487,12 @@ class Game:
             command = self.commands[command_word]
             command.action(self, list_of_words, command.number_of_parameters)"""
 
-
-    def print_welcome(self):
-        """
-        Affiche un message de bienvenue, incluant le nom du joueur
-        et la description de la pièce initiale.
-        """
+    def print_welcome(self): # NOUVEAU
+        """Affiche un message de bienvenue et la description initiale"""
         print(f"\nBienvenue {self.player.name} dans ce jeu d'aventure !")
         print("Entrez 'help' si vous avez besoin d'aide.")
-        print(self.player.current_room.get_long_description())
-
-
+        print(f"Vous êtes dans {self.player.current_room.description}")
+        print("Sorties:", ", ".join(self.player.current_room.exits.keys()))
 
 
 def main():
