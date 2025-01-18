@@ -1,5 +1,8 @@
-#description de la class Item*
+"""
+Module Item
 
+Ce module définit la classe `Item`, qui représente un objet manipulable dans le jeu.
+"""
 class Item:
     """
     Classe représentant un objet dans le jeu.
