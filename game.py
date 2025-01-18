@@ -152,17 +152,17 @@ class Game:
 
 
         # Configuration des sorties
-        salon.exits = {"D": cave, "E": bureau, "S": salle_musique, "O": jardin, "NE": veranda, "U": chambre}
-        cave.exits = {"S": salon, "O": jardin, "N": salon, "U": jardin}
-        bureau.exits = {"O": salon, "E": salle_musique}
-        salle_musique.exits = {"N": salon, "E": bureau, "U": chambre, "O": jardin}
-        jardin.exits = {"N": salon, "D": cave, "E": veranda, "O": jungle, "U": dressing}
-        veranda.exits = {"N": jungle, "S": jardin}
-        chambre.exits = {"N": salle_musique, "E": dressing,"D": salon}  # Chambre monte vers le salon
-        dressing.exits = {"O": chambre, "S": jardin, "D": jardin}
-        jungle.exits = {"S": jardin, "N": veranda, "E": plage,"O":villa}
-        plage.exits = {"O": jungle, "N": villa}
-        villa.exits = {"S": plage,"O":jungle,"N": salon}
+        salon.exits = {"D": cave, "E": bureau, "O": salle_musique,"U": chambre}
+        cave.exits = {"U": salon}
+        bureau.exits = {"O": salon, "E": jungle}
+        salle_musique.exits = {"E": salon,"O": jardin}
+        jardin.exits = {"E": salle_musique,"N": veranda, "S": jungle}
+        veranda.exits = {"NE": jungle, "S": jardin}
+        chambre.exits = {"O": dressing,"D": salon}  # Chambre monte vers le salon
+        dressing.exits = {"E": chambre}
+        jungle.exits = {"N0": veranda, "SO": plage, "N":jardin}
+        plage.exits = {"E": jungle, "N": villa}
+        villa.exits = {"S": plage,"E":jungle,"N": salon}
 
 
         #Images/sallon_jeu.jpg
