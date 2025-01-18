@@ -210,10 +210,10 @@ class Game:
         villa.inventory['chocolat']=chocolat 
         
         # Setup Personnages
-        Beyonce = Character("Beyonce", "La star", salle_musique, ["don't forget to thank me"])
-        Jack = Character("Jack Letombeur","Le seducteur endiablé",chambre,["Ravie d'avoir enfin la possibilité de te parler yeux dans les yeux"])
-        Lloyde = Character("Lloyde","Le gameur déchu",bureau,["Jsuis occupé ferme les rideaux stp"])
-        Orion = Character("Orion","Le scientifique fou",veranda,["Passe moi le bécher","Je suis un génie des sciences AHAHAHA"])
+        Beyonce = Character("Beyonce", "La star", salle_musique, ["\nJe suis une star tout le monde me connaît je suis reconnu partout où je vais,cette maison n'est pas à ma hauteur,\nM'observe pas comme ça tu devrais plutôt aller voir Orion.\nJ'ai entendu dire qu'il était devenu fou et avait inventé des sérums pour 'faire rajeunir les gens' mais qu'il les défigurait à la place pour que tout le monde lui ressemble .\nTu es surpris de ce que tu apprends,certes il est toujours enfermé dans la veranda comme-ci personne ne pouvait le voir"])
+        Jack = Character("Jack Letombeur","Le seducteur endiablé",chambre,["Ravie d'avoir enfin la possibilité de te parler yeux dans les yeux mon/ma jolie.\nPourquoi veux-tu t'éloigner de moi?, reste je sais ce que tu veux c'est bon je serais calme.\nComme je suis si beau Beyonce s'est confié je sais qu'elle n'a pas hésiter à éliminer des gens sur son passage pour être la star qu'elle est"])
+        Lloyde = Character("Lloyde","Le gameur déchu",bureau,["\nFerme la porte je travailles.\nJe sais ce que tu veux si tu reviens plus jamais me voir je te le dis.\nJ'ai fait mes recherches, Méfie de toi de Jack il a pour habitude de profiter de ses 'charmes'pour arnaquer les gens.\n Il va très loin et promets le grand amour puis les quittes en prenant l'argent et certains de desespoir amoureux sont morts. "])
+        Orion = Character("Orion","Le scientifique fou",veranda,["\nAHAHAH je t'attendais mon petit, tu es gênés de me voir defiguré ? C'est pas grave j'ai l'habitude.\nObserve un vrai laboratoire de VRAI science pas comme ce que fait ce hacker de Lloyde, tu sais qu'il travaillais dans la vente d'armes pour des terroristes sur le darkweb ? Mais bien sûr pour lui c'est normal même si des milliers de personnes meurent par sa faute."])
        
         #Setup personnage par lieux
         """salle_musique.characters[Beyonce.name] = Beyonce

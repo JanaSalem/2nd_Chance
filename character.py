@@ -136,7 +136,7 @@ class Character():
         Lorsqu'un message est affiché, il ne sera plus affiché dans les appels suivants,
         mais les messages sont réutilisés lorsque tous ont été affichés une fois.
         """
-        if not self.msg:
+        """if not self.msg:
             print(f"{self.name} n'a rien à dire.")
             return
 
@@ -144,4 +144,10 @@ class Character():
         print(self.msg[self.msg_index])
 
         # Incrémenter l'index, et revenir à 0 lorsqu'on atteint la fin
-        self.msg_index = (self.msg_index + 1) % len(self.msg)
+        self.msg_index = (self.msg_index + 1) % len(self.msg)"""
+        if len(self.msg)<=0:
+            return None
+        else : 
+            msg=self.msg.pop(0)
+            print(msg)
+            self.msg.append(msg)
