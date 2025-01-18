@@ -255,17 +255,17 @@ class Game:
         # #maquillage = Item("maquillage", "plusieurs trousses remplis de maquillage sont mis a disposition sur l'ilot se situant au mileu du dressing", 0.5)
         # #fruits= Item("fruits enchantés", "sur plusieurs arbres de la forêt tu peux apercevoir des fruits mystérieux qui semblent appétissant ils sont entouré de lumière, ils t'appellent", 4)
 
-        poison = Item("poison magique🐟","Un peut de chance, on ne dis pas non...",1)
-        chocolat = Item("chocolat🍫","J'éspère que tu n'est pas alérgique a cette merveille",1)
+        poisson = Item("poisson magique🐟","Un peu de chance, on ne dit pas non...",1)
+        chocolat = Item("chocolat🍫","J'espère que tu n'es pas allergique à cette merveille",1)
         bougie = Item("bougie🕯️", "une bougie parfumée", 0.2)
         receuil = Item("receuil de poèmes📜🪶", "un livre ouvert et marqué par le temps qui semble avoir beaucoup servit est sur la table de chevet",0.5)
-        tablette = Item("tablette portable📱", "Dans cette sombre pièce tou vois branché à l'ordinateur une tablette mystérieuse", 1)
-        partition = Item("partition 🎻", "tu trouves sur le piano une partition d'une mélodie qui te semblent mélodieuse", 1)
-        chat = Item("chat bleu magique 🐈‍⬛","Voudrai tu de la compagnie dans ton aventure?",1)
+        tablette = Item("tablette portable📱", "Dans cette sombre pièce tu vois branché à l'ordinateur une tablette mystérieuse", 1)
+        partition = Item("partition 🎻", "tu trouves sur le piano une partition d'une mélodie qui te semble mélodieuse", 1)
+        chat = Item("chat bleu magique 🐈‍⬛","Voudras-tu de la compagnie dans ton aventure?",1)
         arc = Item("arc et fléches🏹", "Prendras-tu cette arme pour t'accompagner lors de ton aventure ?", 1)
 
 
-        plage.inventory['poison']=poison
+        plage.inventory['poisson']=poisson
         villa.inventory['chocolat']=chocolat
         salon.inventory['bougie'] = bougie
         chambre.inventory['receuil']=receuil
@@ -284,13 +284,25 @@ class Game:
 
         # Setup Personnages
         beyonce = Character("Beyonce", "La star ⭐", salle_musique,
-        ["\nJe suis une star tout le monde me connaît je suis reconnu partout où je vais,cette maison n'est pas à ma hauteur,\nM'observe pas comme ça tu devrais plutôt aller voir Orion.\nJ'ai entendu dire qu'il était devenu fou et avait inventé des sérums pour 'faire rajeunir les gens' mais qu'il les défigurait à la place pour que tout le monde lui ressemble .\nTu es surpris de ce que tu apprends,certes il est toujours enfermé dans la veranda comme-ci personne ne pouvait le voir"])
+        ["\nJe suis une star tout le monde me connaît"
+        " je suis reconnu partout où je vais,cette maison n'est pas à ma hauteur,\nM'observe pas comme ça tu devrais plutôt aller voir Orion.\nJ'ai entendu dire qu'il était devenu fou et avait inventé des sérums pour 'faire rajeunir les gens' mais qu'il les défigurait à la place pour que tout le monde lui ressemble .\nTu es surpris de ce que tu apprends,certes il est toujours enfermé dans la veranda comme-ci personne ne pouvait le voir"])
         jack = Character("Jack Letombeur","Le seducteur endiablé ❤️",chambre,
-        ["Ravie d'avoir enfin la possibilité de te parler yeux dans les yeux mon/ma jolie.\nPourquoi veux-tu t'éloigner de moi?, reste je sais ce que tu veux c'est bon je serais calme.\nComme je suis si beau Beyonce s'est confié je sais qu'elle n'a pas hésiter à éliminer des gens sur son passage pour être la star qu'elle est"])
+        ["Ravie d'avoir enfin la possibilité de te parler yeux dans les yeux mon/ma jolie."
+        "\nPourquoi veux-tu t'éloigner de moi?, reste je sais ce que tu veux c'est bon je serais calme."
+        "\nComme je suis si beau Beyonce s'est confié"
+        " je sais qu'elle n'a pas hésiter à éliminer des gens sur son passage pour être la star qu'elle est"])
         lloyde = Character("Lloyde","Le gameur déchu🎮",bureau,
-        ["\nFerme la porte je travailles.\nJe sais ce que tu veux si tu reviens plus jamais me voir je te le dis.\nJ'ai fait mes recherches, Méfie de toi de Jack il a pour habitude de profiter de ses 'charmes'pour arnaquer les gens.\n Il va très loin et promets le grand amour puis les quittes en prenant l'argent et certains de desespoir amoureux sont morts. "])
+        ["\nFerme la porte je travailles.\nJe sais ce que tu veux "
+        "si tu reviens plus jamais me voir je te le dis."
+        "\nJ'ai fait mes recherches, Méfie de toi de Jack il a pour habitude de profiter de ses 'charmes'"
+        "pour arnaquer les gens.\n Il va très loin et promets le grand amour puis"
+        " les quitte en prenant l'argent et certains de désespoir amoureux sont morts. "])
         orion = Character("Orion","Le scientifique fou ⚛︎ 🧬 🧫 🧪",veranda,
-        ["\nAHAHAH je t'attendais mon petit, tu es gênés de me voir defiguré ? C'est pas grave j'ai l'habitude.\nObserve un vrai laboratoire de VRAI science pas comme ce que fait ce hacker de Lloyde, tu sais qu'il travaillais dans la vente d'armes pour des terroristes sur le darkweb ? Mais bien sûr pour lui c'est normal même si des milliers de personnes meurent par sa faute."])
+        ["\nAHAHAH je t'attendais mon petit, tu es gênés de me voir defiguré ?"
+        " C'est pas grave j'ai l'habitude.\nObserve un vrai laboratoire"
+        " de VRAI science pas comme ce que fait ce hacker de Lloyde,"
+        " tu sais qu'il travaillais dans la vente d'armes pour des terroristes sur le darkweb ?"
+        " Mais bien sûr pour lui c'est normal même si des milliers de personnes meurent par sa faute."])
 
         salle_musique.inventory['beyonce'] = beyonce
         chambre.inventory['jack'] = jack
@@ -346,7 +358,7 @@ class Game:
             #'épée': quest8,
             'chat': quest9,
             'arc': quest10,
-            'poison': quest11
+            'poisson': quest11
         }
 
         # Configuration du joueur , setup player and starting room
@@ -383,7 +395,7 @@ class Game:
         s"""
         # Liste de tous les objets requis (excluant les personnages)
         required_items = {'bougie', 'tablette', 'receuil', 'partition',
-                         'chat', 'arc', 'poison', 'chocolat'}
+                         'chat', 'arc', 'poisson', 'chocolat'}
 
         # Liste de tous les personnages
         all_characters = {'beyonce', 'jack', 'lloyde', 'orion'}
@@ -504,7 +516,9 @@ class Game:
 
 
 def main():
-    # Create a game object and play the game
+    """
+    Create a game object and play the game
+    """
     Game().play()
 
 
