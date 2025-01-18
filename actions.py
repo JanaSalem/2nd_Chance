@@ -1,3 +1,6 @@
+import os
+from PIL import Image
+
 #from config import DEBUG
 # Description: The actions module.
 
@@ -57,19 +60,32 @@ class Actions:
 
         # Get the direction from the list of words.
         direction = list_of_words[1]
-        
+        if direction in player.current_room.exits:
+            # Move the player in the direction specified by the parameter.
+            player.move(direction)
+            player.current_room.visited = True #???
+            # Afficher la description de la pièce actuelle
+            print(player.current_room.description)
+            #Affiche description de la pièce actuelle
+            if not player.current_room.visited:
+                player.current_room.show_image()
+            print(f"\nSorties: {', '.join(player.current_room.exits.keys())}\n")
 
-        if direction not in player.current_room.exits:
+            
+        else:
+            print("Direction non valide veuillez réessayer")
+        return True
+
+        """if direction not in player.current_room.exits:
             print(f"\nIl n'y a pas de sortie dans la direction {direction}.")
-            return False
-    
+        return False
         # Move the player in the direction specified by the parameter.
         sucess = player.move(direction)
         if not sucess:
-            return False
+            return False"""
         
-         # Afficher la description de la pièce actuelle
-        print(player.current_room.description)
+        # Afficher la description de la pièce actuelle
+        """print(player.current_room.description)
         print(f"\nSorties: {', '.join(player.current_room.exits.keys())}\n")
 
         # Affichage des personnages dans la pièce
@@ -77,7 +93,7 @@ class Actions:
             for character in player.current_room.characters.values():
                 print(f"Vous voyez {character.name} ici : {character.description}")
 
-        return True
+        return True"""
 
 
 
@@ -188,7 +204,7 @@ class Actions:
         Permet au joueur de revenir à la dernière pièce visitée.
         """
         player = game.player
-        # Vérifiez si l'historique n'est pas vide
+        """# Vérifiez si l'historique n'est pas vide
         if len(player.history) > 0:
             # Retirer la dernière pièce de l'historique et définir cette pièce comme la pièce actuelle
             last_room = player.history.pop()
@@ -200,10 +216,27 @@ class Actions:
         else:
             # Si l'historique est vide, le joueur ne peut pas revenir en arrière
             print("\nIl n'y a aucune pièce précédente dans l'historique.")
+            return False"""
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
             return False
+        #cas dans lequel le joueur est dans la piece de départ
+        if player.history == []:
+            print ("Vous etes a la case de départ")
+            return False
+        else:
+            room=player.history.pop()
+            player.current_room= room
+            player.get_history()
+            print(player.current_room.get_long_description())
+            return True
+    
         
     def check(game, list_of_words, number_of_parameters):
         l = len(list_of_words)
+        player=game.player
         if l != number_of_parameters + 1:
             command_word = list_of_words[0]
             print(MSG0.format(command_word=command_word))
@@ -213,17 +246,28 @@ class Actions:
         return True
 
     def look(game, list_of_words, number_of_parameters):
-        l = len(list_of_words)
+        """l = len(list_of_words)
         if l != number_of_parameters + 1:      #le joueur n'a pas correctement saisi la commande.
             command_word = list_of_words[0]
             print(MSG0.format(command_word = command_word))
             return False
    
-        game.player.current_room.print_inventory_room()
+        game.player.current_room.print_inventory()
+        return True"""
+        # Permet d'identifié les items et pnj présents dans la pièce  
+        player = game.player
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+        
+        game.player.current_room.print_inventory()
+        #print(game.player.current_room.get_long_description())
         return True
     
     def take(game, list_of_words, number_of_parameters):
-        l = len(list_of_words)
+        """l = len(list_of_words)
         if l != number_of_parameters + 1:
             command_word = list_of_words[0]
             print(MSG1.format(command_word=command_word))
@@ -250,27 +294,58 @@ class Actions:
         self.player.add_item(item)
         # Retire l'objet de la pièce (ou le met dans l'inventaire de la pièce)
         del self.current_room.inventory[item_name]
-        print(f"\nVous avez pris l'objet '{item_name}'.")
+        print(f"\nVous avez pris l'objet '{item_name}'.")"""
         
-   
-    def drop(game, list_of_words, number_of_parameters):
         l = len(list_of_words)
+        player=game.player
+        # If the number of parameters is incorrect, print an error message and return False.
         if l != number_of_parameters + 1:
             command_word = list_of_words[0]
             print(MSG1.format(command_word=command_word))
             return False
+        
+        if list_of_words[1] in player.current_room.inventory.keys():
+            player.inventory[list_of_words[1]]= player.current_room.inventory[list_of_words[1]]
+            del player.current_room.inventory[list_of_words[1]]
+            print()
+            print("tu viens de prendre {}".format(list_of_words[1]))
+            print()
+        else:
+            print("cet item n'est pas disponible")
+        return True
    
-        item_choisi = list_of_words[1]
+    def drop(game, list_of_words, number_of_parameters):
+        l = len(list_of_words)
+        player=game.player
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG1.format(command_word=command_word))
+            return False
+        
+        if list_of_words[1] in player.inventory.keys():
+            player.current_room.inventory[list_of_words[1]]= player.inventory[list_of_words[1]]
+            del player.inventory[list_of_words[1]]
+            print()
+            print("tu viens de deposer {}".format(list_of_words[1]))
+            print()
+        else:
+            print("cet item n'est pas dans ton inventaire")
+        return True
+
+   
+        """item_choisi = list_of_words[1]
         for i in game.player.inventory:
             if i.name == item_choisi :
-                game.player.current_room.inventory_room.add(i)
+                game.player.current_room.inventory.add(i)
                 del game.player.inventory[i]
                 print("\nCette item a été retiré à votre inventaire !")
-                return True
+            else:
+                print("cet item n'est pas dans ton inventaire")    
+            return True"""
+        
 
 
-        print("Cette item n'existe pas")
-
+        
 #    """ def drop(game, list_of_words, number_of_parameters):
 #         l = len(list_of_words)
 #         if l != number_of_parameters + 1:
@@ -301,7 +376,8 @@ class Actions:
         number_of_parameters : int
             Le nombre de paramètres requis par la commande.
         """
-        if len(list_of_words) - 1 < number_of_parameters:
+        
+        """if len(list_of_words) - 1 < number_of_parameters:
             print("Cette commande nécessite un paramètre supplémentaire (le nom du personnage).")
             return
 
@@ -317,4 +393,20 @@ class Actions:
         
         else : 
             # Si aucun personnage n'a été trouvé
-            print(f"\nIl n'y a aucun personnage nommé '{character_name}' ici.\n")
+            print(f"\nIl n'y a aucun personnage nommé '{character_name}' ici.\n")"""
+
+        #permet au joueur de connaître ce que les pnj ont a dire
+        # If the number of parameters is incorrect, print an error message and return False.
+        l = len(list_of_words)
+        player=game.player
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG1.format(command_word=command_word))
+            return False
+
+        print(game.player.current_room.inventory[list_of_words[1]])
+        if list_of_words[1] in game.player.current_room.inventory.keys() :
+                game.player.current_room.inventory[list_of_words[1]].get_msg()
+        else:
+                print(list_of_words[1] + " n'est pas disponible")
+        return True

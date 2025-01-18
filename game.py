@@ -1,9 +1,5 @@
 # Description: Game class
 # Import modules
-
-
-
-
 from room import Room
 from player import Player
 from command import Command
@@ -76,7 +72,7 @@ class Game:
         self.rooms = []
         self.commands = {}
         self.player = None
-        self.characters = {} #🌟
+        #self.characters = {} #🌟
         #self.direction_ensemble = set()
         self.valid_direction = set() # Initialise valid_direction comme un ensemble vide
         #Ajout le dictionnaire des alias et des directions 
@@ -133,17 +129,17 @@ class Game:
 
 
         # Configuration des pièces
-        salon = Room("Salon", "le salon,un espace chaleureux et lumineux au cœur de la maison, entouré de baies vitrées donnant sur la nature luxuriante .")
-        cave = Room("Cave", " la cave, un endroit sombre et frais où se trouvent des objets anciens et des armes de toutes sortes.")
-        bureau = Room("Bureau", "le bureau, un lieu tranquille, entouré de Led de toutes les couleurs eclairant seules la pieces au centre plusieurs pc gamers pour un setup des plus immersifs.")
-        salle_musique = Room("Salle de Musique", "une salle remplie d'instruments ,d'un piano qui résonne harmonieusement et d'un micro demandant d'acceuillir les plus belles voix.")
-        jardin = Room("Jardin", "un jardin, un espace verdoyant où les plantes tropicales prospèrent.")
-        veranda = Room("Véranda", "un endroit ouvert sur l'île, offrant une vue paisible sur la jungle et la plage qui est rempli d'intruments scientifiques des plus étranges.")
-        chambre = Room("Chambre", "un refuge confortable avec un lit balladaquin ayant une vue maginifique sur le jardin.")
-        dressing = Room("Dressing", "un endroit rempli de vêtements et d'accessoires de luxe, soigneusement organisés.")
-        jungle = Room("Jungle", "un lieu dense et mystérieux rempli de faune exotique et mystique.")
-        plage = Room("Plage", "un endroit idyllique, où le sable chaud rencontre la mer turquoise.")
-        villa = Room("Villa", "la Villa, le point central de vie sur l'île, accueillant et protégé.")
+        salon = Room("Salon", "le salon,un espace chaleureux et lumineux au cœur de la maison, entouré de baies vitrées donnant sur la nature luxuriante .","Images/sallon_jeu.jpeg")
+        cave = Room("Cave", " la cave, un endroit sombre et frais où se trouvent des objets anciens et des armes de toutes sortes.","Images/cave_jeu.jpeg")
+        bureau = Room("Bureau", "le bureau, un lieu tranquille, entouré de Led de toutes les couleurs eclairant seules la pieces au centre plusieurs pc gamers pour un setup des plus immersifs.","Images/bureau_jeu")
+        salle_musique = Room("Salle de Musique", "une salle remplie d'instruments ,d'un piano qui résonne harmonieusement et d'un micro demandant d'acceuillir les plus belles voix.","Images/salle_de_musique")
+        jardin = Room("Jardin", "un jardin, un espace verdoyant où les plantes tropicales prospèrent.","Images/jardin.jpeg")
+        veranda = Room("Véranda", "un endroit ouvert sur l'île, offrant une vue paisible sur la jungle et la plage qui est rempli d'intruments scientifiques des plus étranges.","Images/veranda_jeu.jpeg")
+        chambre = Room("Chambre", "un refuge confortable avec un lit balladaquin ayant une vue maginifique sur le jardin.","Images/chambre_jeu.jpeg")
+        dressing = Room("Dressing", "un endroit rempli de vêtements et d'accessoires de luxe, soigneusement organisés.","Images/dresing_jeu.jpeg")
+        jungle = Room("Jungle", "un lieu dense et mystérieux rempli de faune exotique et mystique.","Images/jungle_jeu.jpeg")
+        plage = Room("Plage", "un endroit idyllique, où le sable chaud rencontre la mer turquoise.","Images/plage_image.jpeg")
+        villa = Room("Villa", "la Villa, le point central de vie sur l'île, accueillant et protégé.","Images/villa_jeu.jpeg")
 
 
         # Ajouter les pièces à la liste des pièces
@@ -164,7 +160,7 @@ class Game:
         villa.exits = {"S": plage,"O":jungle,"N": salon}
 
 
-
+        #Images/sallon_jeu.jpg
     
 
         #Ajout des objets
@@ -184,25 +180,14 @@ class Game:
         tablette = Item("tablette portable", "Dans cette sombre pièce tou vois branché à l'ordinateur une tablette mystérieuse", 1)
        
        
-        salon.inventory_room ={bougie}
-        cave.inventory_room ={armes,épée,poignard,revolver}
-        bureau.inventory_room ={tablette}
-        salle_musique.inventory_room ={partition,micro}
-        chambre.inventory_room ={lettre,receuil_de_poeme}
-        dressing.inventory_room ={robe_paillette,maquillage}
-        jungle.inventory_room ={fruits_enchantes}
+        salon.inventory['bougie'] = bougie
+        cave.inventory['armes','épée','poignard','revolver'] = armes, épée, poignard,revolver
+        bureau.inventory['tablette']=tablette
+        salle_musique.inventory ['partition','micro']=partition, micro
+        chambre.inventory['lettre','receuil_de_poeme']= lettre, receuil_de_poeme
+        dressing.inventory['robe_paillette','maquillage']= robe_paillette,maquillage
+        jungle.inventory['fruits_enchantes']=fruits_enchantes
         
-
-
-        #Inventaires par lieu :
-        salon.inventory_room ={bougie}
-        chambre.inventory_room ={lettre, receuil_de_poeme}
-        dressing.inventory_room = {robe_paillette,maquillage}
-        jungle.inventory_room ={fruits_enchantes}
-        salle_musique.inventory_room ={partition,micro}
-        cave.inventory_room = {armes,poignard,épée,arc,revolver}
-        bureau.inventory_room= {tablette}
-
         # Setup Personnages
         Beyonce = Character("Beyonce", "La star", salle_musique, ["don't forget to tell me"])
         Jack = Character("Jack Letombeur","Le seducteur endiablé",chambre,["Ravie d'avoir enfin la possibilité de te parler yeux dans les yeux"])
@@ -210,21 +195,31 @@ class Game:
         Orion = Character("Orion","Le scientifique fou",veranda,["Passe moi le bécher","Je suis un génie des sciences AHAHAHA"])
        
         #Setup personnage par lieux
-        salle_musique.characters[Beyonce.name.lower()] = Beyonce
-        chambre.characters[Jack.name.lower()] = Jack
-        bureau.characters[Lloyde.name.lower()] = Lloyde
-        veranda.characters[Orion.name.lower()] = Orion
+        """salle_musique.characters[Beyonce.name] = Beyonce
+        chambre.characters[Jack.name] = Jack
+        bureau.characters[Lloyde.name] = Lloyde
+        veranda.characters[Orion.name] = Orion"""
+
+        salle_musique.inventory['beyonce'] = Beyonce
+        chambre.inventory['jack'] = Jack
+        bureau.inventory['lloyde'] = Lloyde
+        veranda.inventory['orion'] = Orion
 
         """character_name = "beyonce"  # Nom du personnage à rechercher
-        character = salle_musique.characters.get(character_name.lower()) 
+        character = salle_musique.characters.get(character_name) 
         character_name = "jack"  # Nom du personnage à rechercher
-        character = chambre.characters.get(character_name.lower()) """
+        character = chambre.characters.get(character_name)"""
 
-        
+
+        # Setup player and starting room
+        for room in self.rooms:
+            for d in room.exits.keys():
+                self.valid_direction.add(d)
+
         # Configuration du joueur , setup player and starting room
         self.player = Player(input("\nEntrez votre nom: "))
         self.player.current_room = plage  # La plage est la pièce de départ
-        self.characters = {"Beyonce":Beyonce,"Jack":Jack,"Orion":Orion,"Lloyde":Lloyde}
+        #self.characters = {"Beyonce":Beyonce,"Jack":Jack,"Orion":Orion,"Lloyde":Lloyde}
 
     def update_valid_direction(self):
         #met à jour les directions valides selon la pièce où est le joueur
@@ -240,15 +235,15 @@ class Game:
         self.print_welcome()
         while not self.finished:
         #Gérer les déplacements des PNJ
-            for character in self.characters.values(): #
+            """for character in self.characters.values(): #
                 print(character)
                 if isinstance(character, Character):  # Vérifie que c'est un PNJ
                     moved = character.move()  # Appelle leur méthode move()
                     if moved:
-                        print(f"{character.name} s'est déplacé dans une autre pièce.")  # Message optionnel
+                        print(f"{character.name} s'est déplacé dans une autre pièce.")"""  # Message optionnel
             
             self.process_command(input("> "))
-        
+        return None 
         """while True:
             # Afficher la description de la pièce et les objets présents
             self.player.current_room.print_inventory_room()
@@ -324,31 +319,40 @@ class Game:
             La commande entrée par le joueur, sous forme de chaîne de caractères.
         """
         # Supprime les espaces au début et à la fin de la chaîne de commande
-        command_string = command_string.strip().lower()
+        #command_string = command_string.strip().lower()
+        list_of_words = command_string.split(" ")
+
+        command_word = list_of_words[0]
 
 
-        # Si la commande est vide, ne rien faire et retourner immédiatement
+        """# Si la commande est vide, ne rien faire et retourner immédiatement
         if not command_string:
             return
         # Sépare la chaîne de commande en une list* de mots (par exemple "go N" devient ["go", "N"])
         list_of_words = command_string.split(" ")
         # Récupère le premier mot, qui est le mot de commande (par exemple "go")
-        command_word = list_of_words[0]
+        command_word = list_of_words[0]"""
+        # If the command is not recognized, print an error message
+        if command_word not in self.commands.keys():
+            print(f"\nCommande '{command_word}' non reconnue. Entrez 'help' pour voir la liste des commandes disponibles.\n")
+        # If the command is recognized, execute it
+        else:
+            command = self.commands[command_word]
+            command.action(self, list_of_words, command.number_of_parameters)
 
         if command_word == 'go':
-        #Met la direction sous le bon format si besoin
+            #Met la direction sous le bon format si besoin
             if len(list_of_words) > 1: #Condition permets de vérifier si le joueur a bien entré un deuxième mot après la commande(premier mot go et le deuxième N,..)
-            
-                raw_direction = list_of_words[1].upper()  # Convertir en majuscules, et les stockes
-                if raw_direction in self.direction_aliases: # un dictionnaire où les clés sont les alias des directions
-                    list_of_words[1] = self.direction_aliases[raw_direction]  # Mapper vers la direction standard
+                raw_valid_direction = list_of_words[1].upper()  # Convertir en majuscules, et les stockes
+                if raw_valid_direction in self.direction_aliases: # un dictionnaire où les clés sont les alias des directions
+                    list_of_words[1] = self.direction_aliases[raw_valid_direction]  # Mapper vers la direction standard
                 else:
                     print(f"\n'{list_of_words[1]}' n'est pas une direction valide.")
                     return
 
 
 
-        # Si le mot de commande n'est pas reconnu, afficher un message d'erreur
+        """# Si le mot de commande n'est pas reconnu, afficher un message d'erreur
         if command_word not in self.commands.keys():
             print(f"\nCommande '{command_word}' non reconnue. Entrez 'help' pour voir la liste des commandes disponibles.\n")
         # Si le mot de commande est reconnu, exécuter l'action associée
@@ -356,7 +360,7 @@ class Game:
             # Récupère l'objet Commande associé au mot de commande
             command = self.commands[command_word]
             # Appelle l'action associée à la commande, en passant le jeu, la liste des mots et le nombre de paramètres
-            command.action(self, list_of_words, command.number_of_parameters)
+            command.action(self, list_of_words, command.number_of_parameters)"""
 
         """# Split the command string into a list of words
         list_of_words = command_string.split(" ")

@@ -14,12 +14,12 @@ class Character():
         return str(self.name) + " : " +  str(self.description)
     
 
-    def move(self):
-        """
+    """def move(self):
+       
         Déplace le personnage non joueur dans une pièce adjacente avec une probabilité de 50% (1 chance sur 2).
         Retourne True si le personnage se déplace, False sinon.
         """
-        """# Chance de 50% de se déplacer
+    """# Chance de 50% de se déplacer
         if random.choice([True, False]):
             # Vérifier qu'il y a des sorties disponibles
             if not self.current_room.exits:
@@ -49,7 +49,7 @@ class Character():
             if DEBUG:
                 print(f"{self.name} reste dans la même pièce.")
             return False"""
-        """print(f"{self.name} tente de se déplacer...")
+    """print(f"{self.name} tente de se déplacer...")
     
         # Afficher la pièce actuelle avant le déplacement
         print(f"{self.name} est actuellement dans la pièce: {self.current_room.name}")
@@ -83,16 +83,17 @@ class Character():
             print(f"{self.name} reste dans la même pièce.")
             return False  # Le personnage ne s'est pas déplacé"""
 
+    """
         # Vérifie s'il y a des sorties dans la pièce actuelle
-        if not self.current_room or not self.current_room.exits:
-            print(f"{self.name} ne peut pas se déplacer, aucune sortie disponible.")
-            return False
+            if not self.current_room or not self.current_room.exits: # type: ignore
+                print(f"{self.name} ne peut pas se déplacer, aucune sortie disponible.") # type: ignore
+            
         
-        # Une chance sur deux de se déplacer (50% de chance)
-        if random.choice([True, False]):
-            # Choisir une direction au hasard parmi les sorties disponibles
-            next_room = random.choice(list(self.current_room.exits.values()))
-            print(f"{self.name} se déplace vers {next_room.name}.")
+            # Une chance sur deux de se déplacer (50% de chance)
+            if random.choice([True, False]):
+                # Choisir une direction au hasard parmi les sorties disponibles
+                next_room = random.choice(list(self.current_room.exits.values())) # type: ignore
+                print(f"{self.name} se déplace vers {next_room.name}.") # type: ignore
             
             # Trouver la pièce adjacente à cette direction
             #next_room = self.current_room.exits[direction]
@@ -108,21 +109,23 @@ class Character():
             #print(f"{self.name} se déplace vers {next_room.name}.")
             #return True
             # Retirer de la pièce actuelle (utilise le nom comme clé)
-            self.current_room.characters.pop(self.name, None)
+                print(self.current_room.characters)
+                self.current_room.characters.pop(self.name.lower())
+                print(self.current_room.characters)
             
-            # Mettre à jour la pièce actuelle
-            self.current_room = next_room
+                # Mettre à jour la pièce actuelle
+                self.current_room = next_room
             
-            # Ajouter le personnage à la nouvelle pièce
-            next_room.characters[self.name] = self
+                # Ajouter le personnage à la nouvelle pièce
+                next_room.characters[self.name.lower()] = self
+            """
             
-            return True
+            
         
-        return False
-        """else:
-            # Le personnage reste dans la pièce actuelle
-            print(f"{self.name} reste dans la pièce {self.current_room.name}.")
-            return False"""
+    """else:
+        # Le personnage reste dans la pièce actuelle
+        print(f"{self.name} reste dans la pièce {self.current_room.name}.")
+        return False"""
 
 
 
