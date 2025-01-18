@@ -92,7 +92,8 @@ class Game:
             "U":"U","UP":"U","D":"D","DOWN":"D"
 
         }
-        
+        self.all_characters_talked = set()  # Pour suivre les personnages avec qui on a parlé
+        self.final_riddle_shown = False  # Pour s'assurer que l'énigme finale n'est montrée qu'une fois
        
     def setup(self):
         """
@@ -247,17 +248,17 @@ class Game:
         quest3 = Quest("Trouveras tu cette énigme?",
                     "Je vole sans ailes,\nje pleure sans yeux.\nQui suis-je ?", "un nuage")
         quest4 = Quest("Jouez la bonne mélodie.",
-                    "Quelle note est entre Fa et La ?", "Sol")
+                    "Quelle note est entre Do et Mi ?", "Ré")
         quest5 = Quest("Trouveras tu le bonne animal?.",
                     "Je suis un prédateur silencieux,\nje vole la nuit et j'ai des yeux perçants.\nQui suis-je ?", "Un hibou")
         quest6 = Quest("Essayez la robe scintillante.",
                     "Quelle couleur mélange bleu et jaune ?", "Vert")
         quest7 = Quest("Apprenez l'art du maquillage.",
                     "Résolvez : 54 x 584", "31536")
-        quest8 = Quest("Hmmm, Question difficil:",
+        quest8 = Quest("Hmmm, Question difficille:",
                     "Quelle est l'emblème du roi soleil (Louis XIV)?", "astre solaire")
         quest9 = Quest("La réponce est tellement logique:",
-                    "Quelle est la meuilleur classe prépa?", "PSI")
+                    "Quelle est la meuilleure classe prépa?", "PSI")
         quest10 = Quest("Réfléchi un peut....",
                     "Girafe = 3,\nÉléphant = 3,\nHippopotame = 5,\nLion = … ?", "2")
         quest11 = Quest("Une facile pour toi :",
@@ -369,6 +370,46 @@ class Game:
             if DEBUG:
                 print("DEBUG: Fin du tour.")"""
 
+    def check_end_game_conditions(self):
+        """Vérifie si toutes les conditions de fin de jeu sont remplies"""
+        # Liste de tous les objets requis (excluant les personnages)
+        required_items = {'bougie', 'tablette', 'receuil', 'partition', 'fruits', 
+                         'robe', 'maquillage', 'épée', 'chat', 'arc', 'poison', 'chocolat'}
+        
+        # Liste de tous les personnages
+        all_characters = {'beyonce', 'jack', 'lloyde', 'orion'}
+        
+        # Vérifie si le joueur a tous les objets requis
+        player_items = set(self.player.inventory.keys())
+        has_all_items = required_items.issubset(player_items)
+        
+        # Vérifie si le joueur a parlé à tous les personnages
+        talked_to_all = self.all_characters_talked == all_characters
+        
+        return has_all_items and talked_to_all
+    def show_final_riddle(self):
+        """Affiche l'énigme finale du jeu"""
+        if not self.final_riddle_shown:
+            print("\n🌟 FÉLICITATIONS ! Vous avez découvert tous les secrets de l'île ! 🌟")
+            print("\nUne dernière énigme vous attend...")
+            print("\nÉnigme finale:")
+            print("Je suis ce qui unit les âmes perdues,")
+            print("Dans mes murs se cachent vérités et mensonges confondus.")
+            print("Chaque habitant porte un masque différent,")
+            print("Mais tous sont liés par un même tourment.")
+            print("Qui suis-je?\n")
+            
+            reponse = input("Votre réponse: ").lower().strip()
+            if reponse == "la villa":  # La réponse à l'énigme finale
+                print("\n🎉 VICTOIRE ! 🎉")
+                print("Vous avez percé le mystère de la villa et de ses habitants !")
+                print("Chaque personnage cachait une part de vérité, mais ensemble,")
+                print("ils racontent l'histoire d'une communauté brisée par les secrets et les mensonges.")
+                self.finished = True
+            else:
+                print("\nCe n'est pas la bonne réponse... Continuez d'explorer pour comprendre le mystère.")
+            self.final_riddle_shown = True
+
 
     def process_command(self, command_string: str) -> None:
         """
@@ -386,6 +427,12 @@ class Game:
 
         command_word = list_of_words[0]
 
+        if command_word == "talk" and len(list_of_words) > 1:
+            character_name = list_of_words[1].lower()
+            self.all_characters_talked.add(character_name)
+        
+        if self.check_end_game_conditions() and not self.final_riddle_shown:
+            self.show_final_riddle()
 
         """# Si la commande est vide, ne rien faire et retourner immédiatement
         if not command_string:
